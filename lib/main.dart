@@ -1,6 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize(); // 追加
   runApp(MyApp());
 }
 
@@ -59,14 +64,41 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
+  String getTestAdBannerUnitId() {
+    String testBannerUnitId = "";
+    if (Platform.isAndroid) {
+      // Android のとき
+      testBannerUnitId =
+          "ca-app-pub-3940256099942544/6300978111"; // Androidのデモ用バナー広告ID
+    } else if (Platform.isIOS) {
+      // iOSのとき
+      testBannerUnitId =
+          "ca-app-pub-3940256099942544/2934735716"; // iOSのデモ用バナー広告ID
+    }
+    return testBannerUnitId;
+  }
+
+  late BannerAd myBanner;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    // バナー広告をインスタンス化
+    myBanner = BannerAd(
+      adUnitId: getTestAdBannerUnitId(),
+      size: AdSize.banner,
+      request: const AdRequest(),
+      listener: const BannerAdListener(),
+    );
+    // バナー広告の読み込み
+    myBanner.load();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -93,13 +125,19 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Container(
+              color: Colors.white,
+              height: 64.0,
+              width: double.infinity,
+              child: AdWidget(ad: myBanner),
+            )
+            //Text(
+            //'You have pushed the button this many times:',
+            //),
+            //Text(
+            //'$_counter',
+            //style: Theme.of(context).textTheme.headline4,
+            //),
           ],
         ),
       ),
