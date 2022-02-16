@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../size_config.dart';
 
 class GameOver extends StatelessWidget {
@@ -22,7 +23,7 @@ class GameOver extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 180,
+                  height: SizeConfig.blockSizeVertical! * 20,
                 ),
                 OutlinedButton(
                   onPressed: () {
@@ -52,6 +53,12 @@ class GameOver extends StatelessWidget {
                         color: Colors.white),
                   ),
                 ),
+                Container(
+                  color: Colors.white.withOpacity(0),
+                  height: SizeConfig.blockSizeVertical! * 8,
+                  width: double.infinity,
+                  child: AdWidget(ad: model.myBanner),
+                )
               ],
             ),
           )
