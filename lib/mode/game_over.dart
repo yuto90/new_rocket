@@ -62,6 +62,6 @@ class GameOver extends StatelessWidget {
               ],
             ),
           )
-        : Text('');
+        : const SizedBox();
   }
 }

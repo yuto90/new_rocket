@@ -41,6 +41,6 @@ class Clear extends StatelessWidget {
               ],
             ),
           )
-        : Text('');
+        : const SizedBox();
   }
 }

@@ -82,6 +82,6 @@ class Top extends StatelessWidget {
               ],
             ),
           )
-        : Text('');
+        : const SizedBox();
   }
 }

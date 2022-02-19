@@ -121,6 +121,6 @@ class How extends StatelessWidget {
               ),
             ],
           )
-        : Text('');
+        : const SizedBox();
   }
 }

@@ -12,7 +12,7 @@ class Ready extends StatelessWidget {
         ? Align(
             alignment: Alignment(0, -0.2),
             child: model.gameHasStarted
-                ? Text('')
+                ? const SizedBox()
                 : Text(
                     'T A P  T O  P L A Y',
                     style: TextStyle(
@@ -21,6 +21,6 @@ class Ready extends StatelessWidget {
                     ),
                   ),
           )
-        : Text('');
+        : const SizedBox();
   }
 }
