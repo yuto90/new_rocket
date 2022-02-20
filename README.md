@@ -1,17 +1,7 @@
-# new_rocket
+# Unlucky Rocket
 
-A new Flutter project.
+障害物に当たらないようにロケットを操作して宇宙にある惑星を目指す縦スクロールゲーム。​
+UFO や流れ星などの障害物を画面タップでかわしつつ惑星を目指していきます。​
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# new_rocket
+A vertically scrolling game where you aim for a planet in space by operating a rocket so as not to hit obstacles.
+Aim for the planet while avoiding obstacles such as UFOs and shooting stars by tapping the screen.
