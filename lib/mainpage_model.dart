@@ -7,7 +7,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 class MainPageModel extends ChangeNotifier {
   String display = 'top';
   // 難易度
-  late double difficulty;
+  double difficulty = 1;
 
   double rocketYaxis = 0;
   double time = 0;
@@ -97,12 +97,12 @@ class MainPageModel extends ChangeNotifier {
   // 難易度設定
   void switchDiffculty(String diff) {
     if (diff == 'hard') {
-      difficulty = 1.5;
+      difficulty = 2;
     } else if (diff == 'normal') {
-      difficulty = 3;
+      difficulty = 5;
     } else {
       // easy
-      difficulty = 5;
+      difficulty = 7;
     }
 
     // 難易度ごとに乱数の係数を調整
@@ -244,22 +244,29 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // 星 -------------------------------------------------------
-        if (star > 1.2 && count >= 30000) {
-          star = -1.2;
-        } else if (count >= 30000) {
-          star += 0.01;
+        // EASY以外
+        if (difficulty != 7) {
+          if (star > 1.2 && count >= 30000) {
+            star = -1.2;
+          } else if (count >= 30000) {
+            star += 0.01;
+          }
         }
-
-        if (star2 > 1.5 && count >= 30000) {
-          star2 = -1.2;
-        } else if (count >= 30000) {
-          star2 += 0.01;
+        // EASY以外またはNORMAL以外
+        if (difficulty != 5 || difficulty != 7) {
+          if (star2 > 1.5 && count >= 30000) {
+            star2 = -1.2;
+          } else if (count >= 30000) {
+            star2 += 0.01;
+          }
         }
-
-        if (star3 > 1.8 && count >= 30000) {
-          star3 = -1.2;
-        } else if (count >= 30000) {
-          star3 += 0.01;
+        // HARDだったら
+        if (difficulty == 2) {
+          if (star3 > 1.8 && count >= 30000) {
+            star3 = -1.2;
+          } else if (count >= 30000) {
+            star3 += 0.01;
+          }
         }
 
         // 地面 --------------------------------------------------

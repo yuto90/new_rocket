@@ -154,18 +154,24 @@ class MainPage extends StatelessWidget {
                     child: Cloud(),
                   ),
                   // * 星 -----------------------------------------------------------
-                  Align(
-                    alignment: Alignment((model.star3 * -1), model.star3),
-                    child: Star(),
-                  ),
-                  Align(
-                    alignment: Alignment((model.star2 * -1), model.star2),
-                    child: Star(),
-                  ),
-                  Align(
-                    alignment: Alignment((model.star * -1), model.star),
-                    child: Star(),
-                  ),
+                  model.difficulty != 7
+                      ? Align(
+                          alignment: Alignment((model.star * -1), model.star),
+                          child: Star(),
+                        )
+                      : const SizedBox(),
+                  model.difficulty != 5 || model.difficulty != 7
+                      ? Align(
+                          alignment: Alignment((model.star2 * -1), model.star2),
+                          child: Star(),
+                        )
+                      : const SizedBox(),
+                  model.difficulty == 2
+                      ? Align(
+                          alignment: Alignment((model.star3 * -1), model.star3),
+                          child: Star(),
+                        )
+                      : const SizedBox(),
                   // * 隕石 -----------------------------------------------------------
                   Align(
                     alignment: Alignment(0.6, model.meteorite3),
