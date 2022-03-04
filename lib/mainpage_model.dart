@@ -64,8 +64,8 @@ class MainPageModel extends ChangeNotifier {
 
     // バナー広告をインスタンス化
     myBanner = BannerAd(
-      //adUnitId: getTestAdBannerUnitId(),
-      adUnitId: 'ca-app-pub-8474156868822041/2299618878',
+      adUnitId: getTestAdBannerUnitId(),
+      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -133,22 +133,22 @@ class MainPageModel extends ChangeNotifier {
   void startGame(context) {
     gameHasStarted = true;
     Timer.periodic(
-      Duration(milliseconds: 30),
+      Duration(milliseconds: 10),
       (timer) {
-        time += 0.015;
-        height = -4.9 * time * time + 0.2 + time;
+        time += 0.005;
+        height = -4.5 * time * time + 0.2 + time;
         rocketYaxis = initialHeight - height;
         notifyListeners();
 
-        count += 30;
+        count += 10;
         // 30秒経過したら背景を黒にする
         if (space < 1500 && count >= 30000) {
-          space += 3.7;
+          space += 2;
         }
 
         // 1分経過したら背景を黒にする
         if (count >= 60000) {
-          goal += 0.01;
+          goal += 0.005;
         }
 
         // ! 惑星に近づいたらクリア
@@ -162,85 +162,85 @@ class MainPageModel extends ChangeNotifier {
         if (ufo_1 < -1.2) {
           ufo_1 = randomDouble(difficulty);
         } else {
-          ufo_1 -= 0.03;
+          ufo_1 -= 0.01;
         }
         if (ufo_075 < -1.2) {
           ufo_075 = randomDouble(difficulty);
         } else {
-          ufo_075 -= 0.03;
+          ufo_075 -= 0.01;
         }
         if (ufo_05 < -1.2) {
           ufo_05 = randomDouble(difficulty);
         } else {
-          ufo_05 -= 0.03;
+          ufo_05 -= 0.01;
         }
         if (ufo_025 < -1.2) {
           ufo_025 = randomDouble(difficulty);
         } else {
-          ufo_025 -= 0.03;
+          ufo_025 -= 0.01;
         }
         if (ufo0 < -1.2) {
           ufo0 = randomDouble(difficulty);
         } else {
-          ufo0 -= 0.03;
+          ufo0 -= 0.01;
         }
         if (ufo025 < -1.2) {
           ufo025 = randomDouble(difficulty);
         } else {
-          ufo025 -= 0.03;
+          ufo025 -= 0.01;
         }
         if (ufo05 < -1.2) {
           ufo05 = randomDouble(difficulty);
         } else {
-          ufo05 -= 0.03;
+          ufo05 -= 0.01;
         }
         if (ufo075 < -1.2) {
           ufo075 = randomDouble(difficulty);
         } else {
-          ufo075 -= 0.03;
+          ufo075 -= 0.01;
         }
         if (ufo1 < -1.2) {
           ufo1 = randomDouble(difficulty);
         } else {
-          ufo1 -= 0.03;
+          ufo1 -= 0.01;
         }
 
         //雲  --------------------------------------------------
         if (back > 1.2 && count <= 30000) {
           back = -1.2;
         } else {
-          back += 0.01;
+          back += 0.005;
         }
 
         if (back2 > 1.5 && count <= 30000) {
           back2 = -1.2;
         } else {
-          back2 += 0.01;
+          back2 += 0.005;
         }
 
         if (back3 > 1.8 && count <= 30000) {
           back3 = -1.2;
         } else {
-          back3 += 0.01;
+          back3 += 0.005;
         }
 
         //隕石  --------------------------------------------------
         if (meteorite > 1.2 && count >= 30000) {
           meteorite = -1.2;
         } else if (count >= 30000) {
-          meteorite += 0.01;
+          meteorite += 0.005;
         }
 
         if (meteorite2 > 1.5 && count >= 30000) {
           meteorite2 = -1.2;
         } else if (count >= 30000) {
-          meteorite2 += 0.01;
+          meteorite2 += 0.005;
         }
 
         if (meteorite3 > 1.8 && count >= 30000) {
           meteorite3 = -1.2;
         } else if (count >= 30000) {
-          meteorite3 += 0.01;
+          meteorite3 += 0.005;
         }
 
         // 星 -------------------------------------------------------
@@ -249,7 +249,7 @@ class MainPageModel extends ChangeNotifier {
           if (star > 1.2 && count >= 30000) {
             star = -1.2;
           } else if (count >= 30000) {
-            star += 0.01;
+            star += 0.005;
           }
         }
         // EASY以外またはNORMAL以外
@@ -257,7 +257,7 @@ class MainPageModel extends ChangeNotifier {
           if (star2 > 1.5 && count >= 30000) {
             star2 = -1.2;
           } else if (count >= 30000) {
-            star2 += 0.01;
+            star2 += 0.005;
           }
         }
         // HARDだったら
@@ -265,13 +265,13 @@ class MainPageModel extends ChangeNotifier {
           if (star3 > 1.8 && count >= 30000) {
             star3 = -1.2;
           } else if (count >= 30000) {
-            star3 += 0.01;
+            star3 += 0.005;
           }
         }
 
         // 地面 --------------------------------------------------
         if (ground > 0) {
-          ground += 0.01;
+          ground += 0.005;
           notifyListeners();
         }
 
