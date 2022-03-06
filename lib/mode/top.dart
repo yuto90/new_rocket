@@ -30,7 +30,7 @@ class Top extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    model.switchDiffculty('hard');
+                    model.switchDifficulty('hard');
                     model.switchDisplay('ready');
                   },
                   child: Text(
@@ -43,7 +43,7 @@ class Top extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    model.switchDiffculty('normal');
+                    model.switchDifficulty('normal');
                     model.switchDisplay('ready');
                   },
                   child: Text(
@@ -56,7 +56,7 @@ class Top extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    model.switchDiffculty('easy');
+                    model.switchDifficulty('easy');
                     model.switchDisplay('ready');
                   },
                   child: Text(

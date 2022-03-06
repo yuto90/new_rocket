@@ -95,7 +95,7 @@ class MainPageModel extends ChangeNotifier {
   }
 
   // 難易度設定
-  void switchDiffculty(String diff) {
+  void switchDifficulty(String diff) {
     if (diff == 'hard') {
       difficulty = 2;
     } else if (diff == 'normal') {
