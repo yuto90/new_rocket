@@ -52,6 +52,9 @@ class MainPageModel extends ChangeNotifier {
   // ゲームスタートからの時間
   int count = 0;
 
+  /// ターボフラグ
+  bool turbo = false;
+
   late BannerAd myBanner;
 
   // initState的なやつ
@@ -127,6 +130,14 @@ class MainPageModel extends ChangeNotifier {
   void move() {
     time = 0;
     initialHeight = rocketYaxis;
+
+    // 1秒だけターボエフェクトを表示
+    turbo = true;
+    Future.delayed(Duration(seconds: 1), () {
+      turbo = false;
+      notifyListeners();
+    });
+
     notifyListeners();
   }
 
