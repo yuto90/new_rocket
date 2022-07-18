@@ -8,6 +8,7 @@ import 'mode/ready.dart';
 import 'mode/top.dart';
 import 'objects/building.dart';
 import 'objects/building2.dart';
+import 'objects/explosion.dart';
 import 'objects/goal.dart';
 import 'objects/meteorite.dart';
 import 'objects/office.dart';
@@ -101,7 +102,8 @@ class MainPage extends StatelessWidget {
                   Align(
                     // ロケットの初期位置
                     alignment: Alignment(0, model.rocketYaxis),
-                    child: MyRocket(),
+                    child:
+                        model.display == 'game_over' ? Explosion() : MyRocket(),
                   ),
                   // * 障害物 -----------------------------------------------------------
                   Align(
