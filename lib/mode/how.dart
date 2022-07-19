@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../objects/goal.dart';
 import '../objects/star.dart';
 import '../objects/ufo.dart';
@@ -119,6 +120,16 @@ class How extends StatelessWidget {
                   ),
                 ),
               ),
+              // 広告
+              Align(
+                alignment: Alignment(0, 0.7),
+                child: Container(
+                  color: Colors.white.withOpacity(0),
+                  height: SizeConfig.blockSizeVertical! * 8,
+                  width: double.infinity,
+                  child: AdWidget(ad: model.myBanner),
+                ),
+              )
             ],
           )
         : const SizedBox();
