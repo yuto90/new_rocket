@@ -46,7 +46,21 @@ class MainPage extends StatelessWidget {
                   ),
                   Container(
                     height: model.space,
-                    color: Colors.blueGrey[800],
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: FractionalOffset.topCenter,
+                        end: FractionalOffset.bottomCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.8),
+                          Colors.blue.withOpacity(0.0),
+                        ],
+                        stops: [
+                          model.spaceStops,
+                          1.0,
+                        ],
+                      ),
+                    ),
                   ),
                   // * 地面 ----------------------------------------------------------
                   Align(

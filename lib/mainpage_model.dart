@@ -46,6 +46,7 @@ class MainPageModel extends ChangeNotifier {
 
   // 宇宙の背景色
   double space = 0;
+  double spaceStops = 0;
 
   // ゴール
   double goal = -3;
@@ -154,11 +155,12 @@ class MainPageModel extends ChangeNotifier {
 
         count += 10;
         // 30秒経過したら背景を黒にする
-        if (space < 1500 && count >= 30000) {
+        if (space < 2500 && count >= 30000) {
           space += 2;
+          spaceStops += 0.001;
         }
 
-        // 1分経過したら背景を黒にする
+        // 1分経過したらゴールを画面に表示させる
         if (count >= 60000) {
           goal += 0.005;
         }
@@ -368,6 +370,7 @@ class MainPageModel extends ChangeNotifier {
     gameHasStarted = false;
     ground = 150;
     space = 0;
+    spaceStops = 0;
 
     count = 0;
     // UFO
