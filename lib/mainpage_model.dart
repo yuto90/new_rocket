@@ -132,6 +132,7 @@ class MainPageModel extends ChangeNotifier {
     initialHeight = rocketYaxis;
 
     // 1秒だけターボエフェクトを表示
+    turbo = false;
     turbo = true;
     Future.delayed(Duration(seconds: 1), () {
       turbo = false;

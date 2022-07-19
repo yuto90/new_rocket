@@ -9,14 +9,26 @@ class MyRocket extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.green,
-      height: SizeConfig.blockSizeVertical! * 14,
-      width: SizeConfig.blockSizeHorizontal! * 8,
+      height: SizeConfig.blockSizeVertical! * 10,
+      width: SizeConfig.blockSizeHorizontal! * 10,
       child: Stack(
         children: [
+          turboFlg
+              ? Align(
+                  alignment: Alignment(0, 1.4),
+                  child: SizedBox(
+                    child: Image(
+                      image: AssetImage('lib/images/turbo.png'),
+                      fit: BoxFit.cover,
+                      height: SizeConfig.blockSizeVertical! * 4,
+                      width: SizeConfig.blockSizeHorizontal! * 5,
+                    ),
+                  ),
+                )
+              : SizedBox(),
           Align(
             alignment: Alignment(0, 0),
-            child: Container(
-              //color: Colors.green,
+            child: SizedBox(
               child: Image(
                 image: AssetImage('lib/images/rocket.png'),
                 fit: BoxFit.cover,
@@ -25,20 +37,6 @@ class MyRocket extends StatelessWidget {
               ),
             ),
           ),
-          turboFlg
-              ? Align(
-                  alignment: Alignment(0, 1.5),
-                  child: Container(
-                    //color: Colors.yellow,
-                    child: Image(
-                      image: AssetImage('lib/images/turbo.png'),
-                      fit: BoxFit.cover,
-                      height: SizeConfig.blockSizeVertical! * 6,
-                      width: SizeConfig.blockSizeHorizontal! * 10,
-                    ),
-                  ),
-                )
-              : SizedBox(),
         ],
       ),
     );
