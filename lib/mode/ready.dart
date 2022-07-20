@@ -27,15 +27,23 @@ class Ready extends StatelessWidget {
                 alignment: Alignment(0, 0.35),
                 child: model.gameHasStarted
                     ? const SizedBox()
-                    : OutlinedButton(
-                        onPressed: () {
-                          model.switchDisplay('how');
-                        },
-                        child: Text(
-                          'H O W  T O  P L A Y',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2,
-                            color: Colors.white,
+                    : Container(
+                        height: SizeConfig.blockSizeVertical! * 5,
+                        width: SizeConfig.blockSizeHorizontal! * 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.black,
+                        ),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            model.switchDisplay('how');
+                          },
+                          child: Text(
+                            'H O W  T O  P L A Y',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -45,15 +53,23 @@ class Ready extends StatelessWidget {
                 alignment: Alignment(0, 0.5),
                 child: model.gameHasStarted
                     ? const SizedBox()
-                    : OutlinedButton(
-                        onPressed: () {
-                          model.switchDisplay('top');
-                        },
-                        child: Text(
-                          'B A C K',
-                          style: TextStyle(
-                            fontSize: SizeConfig.blockSizeVertical! * 2,
-                            color: Colors.white,
+                    : Container(
+                        height: SizeConfig.blockSizeVertical! * 5,
+                        width: SizeConfig.blockSizeHorizontal! * 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.black,
+                        ),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            model.switchDisplay('top');
+                          },
+                          child: Text(
+                            'B A C K',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),

@@ -9,15 +9,11 @@ class Top extends StatelessWidget {
   Widget build(BuildContext context) {
     // * タイトル画面
     return model.display == 'top'
-        ? Align(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical! * 18,
-                ),
-                Text(
+        ? Stack(
+            children: [
+              Align(
+                alignment: Alignment(0, -0.2),
+                child: Text(
                   'Unlucky Rocket',
                   style: TextStyle(
                     fontSize: SizeConfig.blockSizeVertical! * 3,
@@ -25,50 +21,80 @@ class Top extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(
-                  height: SizeConfig.blockSizeVertical! * 20,
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    model.switchDifficulty('hard');
-                    model.switchDisplay('ready');
-                  },
-                  child: Text(
-                    'H A R D',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
+              ),
+              Align(
+                alignment: Alignment(0, 0.2),
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      model.switchDifficulty('hard');
+                      model.switchDisplay('ready');
+                    },
+                    child: Text(
+                      'H A R D',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    model.switchDifficulty('normal');
-                    model.switchDisplay('ready');
-                  },
-                  child: Text(
-                    'N O R M A L',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
+              ),
+              Align(
+                alignment: Alignment(0, 0.35),
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      model.switchDifficulty('normal');
+                      model.switchDisplay('ready');
+                    },
+                    child: Text(
+                      'N O R M A L',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    model.switchDifficulty('easy');
-                    model.switchDisplay('ready');
-                  },
-                  child: Text(
-                    'E A S Y',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
+              ),
+              Align(
+                alignment: Alignment(0, 0.5),
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      model.switchDifficulty('easy');
+                      model.switchDisplay('ready');
+                    },
+                    child: Text(
+                      'E A S Y',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           )
         : const SizedBox();
   }

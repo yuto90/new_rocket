@@ -9,36 +9,44 @@ class Clear extends StatelessWidget {
   Widget build(BuildContext context) {
     // * クリア画面
     return model.display == 'clear'
-        ? Align(
-            alignment: Alignment.center,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
+        ? Stack(
+            children: [
+              Align(
+                alignment: Alignment(0, -0.2),
+                child: Text(
                   'C L E A R !!!',
                   style: TextStyle(
                     fontSize: SizeConfig.blockSizeVertical! * 2,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(
-                  height: 180,
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    //model.switchDisplay();
-                    model.display = 'top';
-                    model.resetPosition();
-                  },
-                  child: Text(
-                    'E X I T',
-                    style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 2,
-                        color: Colors.white),
+              ),
+              Align(
+                alignment: Alignment(0, 0.35),
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      //model.switchDisplay();
+                      model.display = 'top';
+                      model.resetPosition();
+                    },
+                    child: Text(
+                      'E X I T',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           )
         : const SizedBox();
   }

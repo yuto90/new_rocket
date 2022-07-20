@@ -107,15 +107,23 @@ class How extends StatelessWidget {
               // 戻るボタン
               Align(
                 alignment: Alignment(0, 0.5),
-                child: OutlinedButton(
-                  onPressed: () {
-                    model.switchDisplay('ready');
-                  },
-                  child: Text(
-                    'B A C K',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      model.switchDisplay('ready');
+                    },
+                    child: Text(
+                      'B A C K',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
