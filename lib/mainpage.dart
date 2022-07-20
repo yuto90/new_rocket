@@ -193,10 +193,10 @@ class MainPage extends StatelessWidget {
                       : const SizedBox(),
                   // * 隕石 -----------------------------------------------------------
                   Align(
-                    alignment: Alignment(0.6, model.meteorite3),
+                    alignment: Alignment(1, model.meteorite),
                     child: Meteorite(
-                      vertical: SizeConfig.blockSizeVertical! * 10,
-                      horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                      vertical: SizeConfig.blockSizeVertical! * 18,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 27,
                     ),
                   ),
                   Align(
@@ -207,10 +207,24 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   Align(
-                    alignment: Alignment(1, model.meteorite),
+                    alignment: Alignment(0.6, model.meteorite3),
                     child: Meteorite(
-                      vertical: SizeConfig.blockSizeVertical! * 20,
-                      horizontal: SizeConfig.blockSizeHorizontal! * 30,
+                      vertical: SizeConfig.blockSizeVertical! * 10,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(0.8, model.meteorite4),
+                    child: Meteorite(
+                      vertical: SizeConfig.blockSizeVertical! * 16,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 26,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment(-0.6, model.meteorite5),
+                    child: Meteorite(
+                      vertical: SizeConfig.blockSizeVertical! * 18,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 27,
                     ),
                   ),
 

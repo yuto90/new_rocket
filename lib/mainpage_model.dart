@@ -42,6 +42,8 @@ class MainPageModel extends ChangeNotifier {
   double meteorite = -3;
   double meteorite2 = -2.8;
   double meteorite3 = -2.6;
+  double meteorite4 = -2.3;
+  double meteorite5 = -2.0;
 
   /// 星オブジェクト
   double star = -2;
@@ -253,20 +255,33 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //隕石  --------------------------------------------------
-        if (meteorite > 1.5 && count >= 35000) {
-          meteorite = -1.5;
-        } else if (count >= 35000) {
-          meteorite += 0.005;
-        }
-        if (meteorite2 > 1.8 && count >= 35000) {
-          meteorite2 = -1.5;
-        } else if (count >= 35000) {
-          meteorite2 += 0.005;
-        }
-        if (meteorite3 > 2 && count >= 35000) {
-          meteorite3 = -1.5;
-        } else if (count >= 35000) {
-          meteorite3 += 0.005;
+        // 35秒経過したら隕石オブジェクトを出す
+        if (count >= 35000) {
+          if (meteorite > 1.5) {
+            meteorite = -1.5;
+          } else if (count >= 35000) {
+            meteorite += 0.005;
+          }
+          if (meteorite2 > 1.8) {
+            meteorite2 = -1.8;
+          } else if (count >= 35000) {
+            meteorite2 += 0.005;
+          }
+          if (meteorite3 > 2) {
+            meteorite3 = -2.0;
+          } else if (count >= 35000) {
+            meteorite3 += 0.005;
+          }
+          if (meteorite4 > 2) {
+            meteorite4 = -1.5;
+          } else if (count >= 35000) {
+            meteorite4 += 0.005;
+          }
+          if (meteorite5 > 2) {
+            meteorite5 = -1.8;
+          } else if (count >= 35000) {
+            meteorite5 += 0.005;
+          }
         }
 
         // 星 -------------------------------------------------------
@@ -403,6 +418,8 @@ class MainPageModel extends ChangeNotifier {
     meteorite = -3;
     meteorite2 = -2.8;
     meteorite3 = -2.6;
+    meteorite4 = -2.3;
+    meteorite5 = -2.0;
 
     star = -2;
     star2 = -2.8;
