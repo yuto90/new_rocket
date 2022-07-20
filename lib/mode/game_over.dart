@@ -30,7 +30,6 @@ class GameOver extends StatelessWidget {
                     //model.switchDisplay();
                     model.display = 'ready';
                     model.resetPosition();
-                    model.reload();
                   },
                   child: Text(
                     'C O N T I N U E',
@@ -44,7 +43,6 @@ class GameOver extends StatelessWidget {
                     //model.switchDisplay();
                     model.display = 'top';
                     model.resetPosition();
-                    model.reload();
                   },
                   child: Text(
                     'E X I T',

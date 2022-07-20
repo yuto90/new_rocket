@@ -29,7 +29,6 @@ class Clear extends StatelessWidget {
                     //model.switchDisplay();
                     model.display = 'top';
                     model.resetPosition();
-                    model.reload();
                   },
                   child: Text(
                     'E X I T',

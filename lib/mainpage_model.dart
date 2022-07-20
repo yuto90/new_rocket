@@ -5,14 +5,21 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class MainPageModel extends ChangeNotifier {
+  /// 表示する画面
   String display = 'top';
-  // 難易度
+
+  /// 難易度
   double difficulty = 1;
 
+  /// ロケットのY座標
   double rocketYaxis = 0;
+
+  /// ロケットのブースト関係
   double time = 0;
   double height = 0;
   double initialHeight = 0;
+
+  /// ゲーム開始中フラグ
   bool gameHasStarted = false;
 
   // 障害物
@@ -26,39 +33,41 @@ class MainPageModel extends ChangeNotifier {
   double ufo075 = 2;
   double ufo1 = 2;
 
-  // 背景の雲
-  double back = -1;
-  double back2 = -0.8;
-  double back3 = -0.6;
+  /// 雲オブジェクト
+  double cloud = -1;
+  double cloud2 = -0.8;
+  double cloud3 = -0.6;
 
-  // 背景の隕石
+  /// 隕石オブジェクト
   double meteorite = -3;
   double meteorite2 = -2.8;
   double meteorite3 = -2.6;
 
-  // 背景の雲
+  /// 星オブジェクト
   double star = -2;
   double star2 = -2.5;
   double star3 = -3;
 
-  // 発射台
+  /// 地面
   double ground = 1.1;
 
-  // 宇宙の背景色
+  /// 宇宙ステージの背景座標用
   double space = 0;
   double spaceStops = 0;
 
-  // ゴール
+  /// グラデーション用
+  /// ゴール
   double goal = -3;
-  // ゲームスタートからの時間
+
+  /// ゲームスタートからの時間
   int count = 0;
 
-  /// ターボフラグ
-  bool turbo = false;
+  /// ブーストフラグ
+  bool boost = false;
 
   late BannerAd myBanner;
 
-  // initState的なやつ
+  /// initState的なやつ
   MainPageModel() {
     initValue();
   }
@@ -66,50 +75,53 @@ class MainPageModel extends ChangeNotifier {
   void initValue() {
     //print('init');
 
-    // バナー広告をインスタンス化
+    /// バナー広告をインスタンス化
     myBanner = BannerAd(
       adUnitId: getTestAdBannerUnitId(),
+
       //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
     );
+
     // バナー広告の読み込み
     myBanner.load();
   }
 
-  // プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
+  /// プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
   String getTestAdBannerUnitId() {
     String testBannerUnitId = "";
     if (Platform.isAndroid) {
-      // Android のとき
-      testBannerUnitId =
-          "ca-app-pub-3940256099942544/6300978111"; // Androidのデモ用バナー広告ID
+      /// Android のとき
+      testBannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+
+      // Androidのデモ用バナー広告ID
       //} else if (Platform.isIOS) {
       //// iOSのとき
       //testBannerUnitId =
-      //"ca-app-pub-3940256099942544/2934735716"; // iOSのデモ用バナー広告ID
+      //"ca-app-pub-3940256099942544/2934735716"; /// iOSのデモ用バナー広告ID
     }
     return testBannerUnitId;
   }
 
-  // オブジェクト位置リセット用の乱数を生成
+  /// オブジェクト位置リセット用の乱数を生成
   double randomDouble(double coefficient) {
     return (Random().nextDouble() + 1) * coefficient;
   }
 
-  // 難易度設定
+  /// 難易度設定
   void switchDifficulty(String diff) {
     if (diff == 'hard') {
       difficulty = 2;
     } else if (diff == 'normal') {
       difficulty = 5;
     } else {
-      // easy
+      /// easy
       difficulty = 7;
     }
 
-    // 難易度ごとに乱数の係数を調整
+    /// 難易度ごとに乱数の係数を調整
     ufo_1 = randomDouble(difficulty);
     ufo_075 = randomDouble(difficulty);
     ufo_05 = randomDouble(difficulty);
@@ -122,27 +134,28 @@ class MainPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 画面を切り替え
+  /// 画面を切り替え
   void switchDisplay(String mode) {
     display = mode;
     notifyListeners();
   }
 
+  // ゲーム進行時に画面タップした時
   void move() {
     time = 0;
     initialHeight = rocketYaxis;
 
     // 1秒だけターボエフェクトを表示
-    turbo = false;
-    turbo = true;
+    boost = true;
     Future.delayed(Duration(seconds: 1), () {
-      turbo = false;
+      boost = false;
       notifyListeners();
     });
 
     notifyListeners();
   }
 
+  // ゲーム開始関数
   void startGame(context) {
     gameHasStarted = true;
     Timer.periodic(
@@ -151,9 +164,10 @@ class MainPageModel extends ChangeNotifier {
         time += 0.005;
         height = -4.5 * time * time + 0.2 + time;
         rocketYaxis = initialHeight - height;
-        notifyListeners();
+        //notifyListeners();
 
         count += 10;
+
         // 30秒経過したら背景を黒にする
         if (space < 2500 && count >= 30000) {
           space += 2;
@@ -220,22 +234,22 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //雲  --------------------------------------------------
-        if (back > 1.2 && count <= 30000) {
-          back = -1.2;
+        if (cloud > 1.2 && count <= 30000) {
+          cloud = -1.2;
         } else {
-          back += 0.005;
+          cloud += 0.005;
         }
 
-        if (back2 > 1.5 && count <= 30000) {
-          back2 = -1.2;
+        if (cloud2 > 1.5 && count <= 30000) {
+          cloud2 = -1.2;
         } else {
-          back2 += 0.005;
+          cloud2 += 0.005;
         }
 
-        if (back3 > 1.8 && count <= 30000) {
-          back3 = -1.2;
+        if (cloud3 > 1.8 && count <= 30000) {
+          cloud3 = -1.2;
         } else {
-          back3 += 0.005;
+          cloud3 += 0.005;
         }
 
         //隕石  --------------------------------------------------
@@ -266,6 +280,7 @@ class MainPageModel extends ChangeNotifier {
             star += 0.005;
           }
         }
+
         // EASY以外またはNORMAL以外
         if (difficulty != 5 || difficulty != 7) {
           if (star2 > 1.5 && count >= 30000) {
@@ -274,6 +289,7 @@ class MainPageModel extends ChangeNotifier {
             star2 += 0.005;
           }
         }
+
         // HARDだったら
         if (difficulty == 2) {
           if (star3 > 1.8 && count >= 30000) {
@@ -296,6 +312,7 @@ class MainPageModel extends ChangeNotifier {
           display = 'game_over';
         }
 
+        // ufoの当たり判定
         if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
             (rocketYaxis <= -0.9 && rocketYaxis >= -1.1)) {
           timer.cancel();
@@ -342,6 +359,7 @@ class MainPageModel extends ChangeNotifier {
           display = 'game_over';
         }
 
+        // 星の当たり判定
         if (((star - rocketYaxis) >= -0.1 && (star - rocketYaxis) <= 0.1) &&
             (star <= 0.15 && star >= -0.15)) {
           timer.cancel();
@@ -362,6 +380,7 @@ class MainPageModel extends ChangeNotifier {
     );
   }
 
+  /// パラメータのリセット
   void resetPosition() {
     rocketYaxis = 0;
     time = 0;
@@ -371,9 +390,8 @@ class MainPageModel extends ChangeNotifier {
     ground = 150;
     space = 0;
     spaceStops = 0;
-
     count = 0;
-    // UFO
+
     ufo_1 = randomDouble(difficulty);
     ufo_075 = randomDouble(difficulty);
     ufo_05 = randomDouble(difficulty);
@@ -384,9 +402,9 @@ class MainPageModel extends ChangeNotifier {
     ufo075 = randomDouble(difficulty);
     ufo1 = randomDouble(difficulty);
 
-    back = -1;
-    back2 = -0.8;
-    back3 = -0.6;
+    cloud = -1;
+    cloud2 = -0.8;
+    cloud3 = -0.6;
 
     meteorite = -2;
     meteorite2 = -1.8;
@@ -398,9 +416,7 @@ class MainPageModel extends ChangeNotifier {
 
     goal = -3;
     ground = 1.1;
-  }
 
-  void reload() {
     notifyListeners();
   }
 }

@@ -25,25 +25,27 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Widgetサイズ最適化用クラスを初期化
     SizeConfig().init(context);
-    return ChangeNotifierProvider<MainPageModel>(
-      create: (_) => MainPageModel(),
-      child: Consumer<MainPageModel>(
-        builder: (context, model, child) {
-          return GestureDetector(
-            onTap: () {
-              if (model.gameHasStarted) {
-                model.move();
-              } else if (model.display == 'ready') {
-                model.startGame(context);
-              }
-            },
-            child: Scaffold(
-              body: Stack(
+
+    return Scaffold(
+      body: ChangeNotifierProvider<MainPageModel>(
+        create: (_) => MainPageModel(),
+        child: Consumer<MainPageModel>(
+          builder: (context, model, child) {
+            return GestureDetector(
+              onTap: () {
+                if (model.gameHasStarted) {
+                  model.move();
+                } else if (model.display == 'ready') {
+                  model.startGame(context);
+                }
+              },
+              child: Stack(
                 children: [
                   // * 空背景 ----------------------------------------------------------
                   Container(
                     color: Colors.blue,
                   ),
+                  //宇宙ステージ
                   Container(
                     height: model.space,
                     width: double.infinity,
@@ -118,7 +120,7 @@ class MainPage extends StatelessWidget {
                     alignment: Alignment(0, model.rocketYaxis),
                     child: model.display == 'game_over'
                         ? Explosion()
-                        : MyRocket(turboFlg: model.turbo),
+                        : MyRocket(boostFlg: model.boost),
                   ),
                   // * 障害物 -----------------------------------------------------------
                   Align(
@@ -159,15 +161,15 @@ class MainPage extends StatelessWidget {
                   ),
                   // * 雲 -----------------------------------------------------------
                   Align(
-                    alignment: Alignment(0.6, model.back3),
+                    alignment: Alignment(0.6, model.cloud3),
                     child: Cloud(),
                   ),
                   Align(
-                    alignment: Alignment(-1, model.back2),
+                    alignment: Alignment(-1, model.cloud2),
                     child: Cloud(),
                   ),
                   Align(
-                    alignment: Alignment(1, model.back),
+                    alignment: Alignment(1, model.cloud),
                     child: Cloud(),
                   ),
                   // * 星 -----------------------------------------------------------
@@ -215,9 +217,9 @@ class MainPage extends StatelessWidget {
                   GameOver(model: model),
                 ],
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

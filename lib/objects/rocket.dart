@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../size_config.dart';
 
 class MyRocket extends StatelessWidget {
-  bool turboFlg;
-  MyRocket({required this.turboFlg});
+  bool boostFlg;
+  MyRocket({required this.boostFlg});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,12 @@ class MyRocket extends StatelessWidget {
       width: SizeConfig.blockSizeHorizontal! * 10,
       child: Stack(
         children: [
-          turboFlg
+          boostFlg
               ? Align(
                   alignment: Alignment(0, 1.4),
                   child: SizedBox(
                     child: Image(
-                      image: AssetImage('lib/images/turbo.png'),
+                      image: AssetImage('lib/images/boost.png'),
                       fit: BoxFit.cover,
                       height: SizeConfig.blockSizeVertical! * 4,
                       width: SizeConfig.blockSizeHorizontal! * 5,
