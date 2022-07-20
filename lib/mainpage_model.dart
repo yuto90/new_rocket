@@ -296,9 +296,8 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // 地面 --------------------------------------------------
-        if (ground > 0) {
+        if (ground <= 2) {
           ground += 0.005;
-          notifyListeners();
         }
 
         //! 当たり判定 ======================================================
@@ -383,7 +382,6 @@ class MainPageModel extends ChangeNotifier {
     height = 0;
     initialHeight = rocketYaxis;
     gameHasStarted = false;
-    ground = 150;
     space = 0;
     spaceStops = 0;
     count = 0;
