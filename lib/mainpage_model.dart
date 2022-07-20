@@ -259,29 +259,25 @@ class MainPageModel extends ChangeNotifier {
         if (count >= 35000) {
           if (meteorite > 1.5) {
             meteorite = -1.5;
-          } else if (count >= 35000) {
-            meteorite += 0.005;
           }
-          if (meteorite2 > 1.8) {
+          if (meteorite2 > 2) {
             meteorite2 = -1.8;
-          } else if (count >= 35000) {
-            meteorite2 += 0.005;
           }
-          if (meteorite3 > 2) {
+          if (meteorite3 > 1.7) {
             meteorite3 = -2.0;
-          } else if (count >= 35000) {
-            meteorite3 += 0.005;
           }
-          if (meteorite4 > 2) {
+          if (meteorite4 > 1.6) {
             meteorite4 = -1.5;
-          } else if (count >= 35000) {
-            meteorite4 += 0.005;
           }
-          if (meteorite5 > 2) {
+          if (meteorite5 > 1.9) {
             meteorite5 = -1.8;
-          } else if (count >= 35000) {
-            meteorite5 += 0.005;
           }
+
+          meteorite += 0.005;
+          meteorite2 += 0.005;
+          meteorite3 += 0.005;
+          meteorite4 += 0.005;
+          meteorite5 += 0.005;
         }
 
         // 星 -------------------------------------------------------
