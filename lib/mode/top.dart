@@ -67,18 +67,6 @@ class Top extends StatelessWidget {
                     ),
                   ),
                 ),
-                OutlinedButton(
-                  onPressed: () {
-                    model.switchDisplay('how');
-                  },
-                  child: Text(
-                    'ルール',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
               ],
             ),
           )

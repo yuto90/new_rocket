@@ -9,17 +9,56 @@ class Ready extends StatelessWidget {
   Widget build(BuildContext context) {
     // * ゲーム開始画面
     return model.display == 'ready'
-        ? Align(
-            alignment: Alignment(0, -0.2),
-            child: model.gameHasStarted
-                ? const SizedBox()
-                : Text(
-                    'T A P  T O  P L A Y',
-                    style: TextStyle(
-                      fontSize: SizeConfig.blockSizeVertical! * 2,
-                      color: Colors.white,
-                    ),
-                  ),
+        ? Stack(
+            children: [
+              Align(
+                alignment: Alignment(0, -0.2),
+                child: model.gameHasStarted
+                    ? const SizedBox()
+                    : Text(
+                        'T A P  T O  P L A Y',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 2,
+                          color: Colors.white,
+                        ),
+                      ),
+              ),
+              Align(
+                alignment: Alignment(0, 0.35),
+                child: model.gameHasStarted
+                    ? const SizedBox()
+                    : OutlinedButton(
+                        onPressed: () {
+                          model.switchDisplay('how');
+                        },
+                        child: Text(
+                          'H O W  T O  P L A Y',
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+              ),
+              // 戻るボタン
+              Align(
+                alignment: Alignment(0, 0.5),
+                child: model.gameHasStarted
+                    ? const SizedBox()
+                    : OutlinedButton(
+                        onPressed: () {
+                          model.switchDisplay('top');
+                        },
+                        child: Text(
+                          'B A C K',
+                          style: TextStyle(
+                            fontSize: SizeConfig.blockSizeVertical! * 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+              ),
+            ],
           )
         : const SizedBox();
   }
