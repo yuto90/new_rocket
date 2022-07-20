@@ -253,18 +253,18 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //隕石  --------------------------------------------------
-        if (meteorite > 1.2 && count >= 35000) {
-          meteorite = -1.2;
+        if (meteorite > 1.5 && count >= 35000) {
+          meteorite = -1.5;
         } else if (count >= 35000) {
           meteorite += 0.005;
         }
-        if (meteorite2 > 1.5 && count >= 35000) {
-          meteorite2 = -1.2;
+        if (meteorite2 > 1.8 && count >= 35000) {
+          meteorite2 = -1.5;
         } else if (count >= 35000) {
           meteorite2 += 0.005;
         }
-        if (meteorite3 > 1.8 && count >= 35000) {
-          meteorite3 = -1.2;
+        if (meteorite3 > 2 && count >= 35000) {
+          meteorite3 = -1.5;
         } else if (count >= 35000) {
           meteorite3 += 0.005;
         }
@@ -400,9 +400,9 @@ class MainPageModel extends ChangeNotifier {
     cloud2 = -0.8;
     cloud3 = -0.6;
 
-    meteorite = -2;
-    meteorite2 = -1.8;
-    meteorite3 = -1.6;
+    meteorite = -3;
+    meteorite2 = -2.8;
+    meteorite3 = -2.6;
 
     star = -2;
     star2 = -2.8;

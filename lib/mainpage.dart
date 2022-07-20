@@ -194,15 +194,24 @@ class MainPage extends StatelessWidget {
                   // * 隕石 -----------------------------------------------------------
                   Align(
                     alignment: Alignment(0.6, model.meteorite3),
-                    child: Meteorite(),
+                    child: Meteorite(
+                      vertical: SizeConfig.blockSizeVertical! * 10,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                    ),
                   ),
                   Align(
-                    alignment: Alignment(-1, model.meteorite2),
-                    child: Meteorite(),
+                    alignment: Alignment(-0.8, model.meteorite2),
+                    child: Meteorite(
+                      vertical: SizeConfig.blockSizeVertical! * 15,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                    ),
                   ),
                   Align(
                     alignment: Alignment(1, model.meteorite),
-                    child: Meteorite(),
+                    child: Meteorite(
+                      vertical: SizeConfig.blockSizeVertical! * 20,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 30,
+                    ),
                   ),
 
                   // * ルール説明画面
