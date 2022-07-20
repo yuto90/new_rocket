@@ -254,9 +254,9 @@ class MainPageModel extends ChangeNotifier {
           cloud3 += 0.005;
         }
 
-        //隕石  --------------------------------------------------
-        // 35秒経過したら隕石オブジェクトを出す
+        // 35秒経過したら宇宙ステージ用オブジェクトを出す
         if (count >= 35000) {
+          //隕石  --------------------------------------------------
           if (meteorite > 1.5) {
             meteorite = -1.5;
           }
@@ -278,31 +278,31 @@ class MainPageModel extends ChangeNotifier {
           meteorite3 += 0.005;
           meteorite4 += 0.005;
           meteorite5 += 0.005;
-        }
 
-        // 星 -------------------------------------------------------
-        // EASY以外
-        if (difficulty != 7) {
-          if (star > 1.2 && count >= 35000) {
-            star = -1.2;
-          } else if (count >= 35000) {
-            star += 0.005;
+          // 星 -------------------------------------------------------
+          // EASY以外
+          if (difficulty != 7) {
+            if (star > 1.2) {
+              star = -1.2;
+            } else {
+              star += 0.005;
+            }
           }
-        }
-        // EASY以外またはNORMAL以外
-        if (difficulty != 5 || difficulty != 7) {
-          if (star2 > 1.5 && count >= 35000) {
-            star2 = -1.2;
-          } else if (count >= 35000) {
-            star2 += 0.005;
+          // EASY以外またはNORMAL以外
+          if (difficulty != 5 || difficulty != 7) {
+            if (star2 > 1.5) {
+              star2 = -1.2;
+            } else {
+              star2 += 0.005;
+            }
           }
-        }
-        // HARDだったら
-        if (difficulty == 2) {
-          if (star3 > 1.8 && count >= 35000) {
-            star3 = -1.2;
-          } else if (count >= 35000) {
-            star3 += 0.005;
+          // HARDだったら
+          if (difficulty == 2) {
+            if (star3 > 1.8) {
+              star3 = -1.2;
+            } else {
+              star3 += 0.005;
+            }
           }
         }
 
