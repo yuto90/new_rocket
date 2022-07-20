@@ -187,7 +187,7 @@ class MainPageModel extends ChangeNotifier {
           display = 'clear';
         }
 
-        // 障害物 -----------------------------------------------
+        // UFO -----------------------------------------------
         // 画面外に出たら
         if (ufo_1 < -1.2) {
           ufo_1 = randomDouble(difficulty);
@@ -236,21 +236,21 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //雲  --------------------------------------------------
-        if (cloud > 1.2 && count <= 30000) {
-          cloud = -1.2;
-        } else {
+        if (count <= 30000) {
+          if (cloud > 1.2) {
+            cloud = -1.2;
+          }
+
+          if (cloud2 > 1.5) {
+            cloud2 = -1.2;
+          }
+
+          if (cloud3 > 1.8) {
+            cloud3 = -1.2;
+          }
+
           cloud += 0.005;
-        }
-
-        if (cloud2 > 1.5 && count <= 30000) {
-          cloud2 = -1.2;
-        } else {
           cloud2 += 0.005;
-        }
-
-        if (cloud3 > 1.8 && count <= 30000) {
-          cloud3 = -1.2;
-        } else {
           cloud3 += 0.005;
         }
 
