@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import '../size_config.dart';
 
 class Cloud extends StatelessWidget {
+  double vertical;
+  double horizontal;
+  Cloud({required this.vertical, required this.horizontal});
+
   @override
   Widget build(BuildContext context) {
-    return Image(
-      image: AssetImage('lib/images/cloud.png'),
-      fit: BoxFit.cover,
-      height: SizeConfig.blockSizeVertical! * 10,
-      width: SizeConfig.blockSizeVertical! * 20,
+    return Container(
+      //color: Colors.red,
+      child: Image(
+        image: AssetImage('lib/images/cloud.png'),
+        fit: BoxFit.cover,
+        height: vertical,
+        width: horizontal,
+      ),
     );
   }
 }

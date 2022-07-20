@@ -161,16 +161,25 @@ class MainPage extends StatelessWidget {
                   ),
                   // * 雲 -----------------------------------------------------------
                   Align(
-                    alignment: Alignment(0.6, model.cloud3),
-                    child: Cloud(),
+                    alignment: Alignment(0.9, model.cloud),
+                    child: Cloud(
+                      vertical: SizeConfig.blockSizeVertical! * 20,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 60,
+                    ),
                   ),
                   Align(
                     alignment: Alignment(-1, model.cloud2),
-                    child: Cloud(),
+                    child: Cloud(
+                      vertical: SizeConfig.blockSizeVertical! * 15,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 45,
+                    ),
                   ),
                   Align(
-                    alignment: Alignment(1, model.cloud),
-                    child: Cloud(),
+                    alignment: Alignment(1, model.cloud3),
+                    child: Cloud(
+                      vertical: SizeConfig.blockSizeVertical! * 20,
+                      horizontal: SizeConfig.blockSizeHorizontal! * 50,
+                    ),
                   ),
                   // * 星 -----------------------------------------------------------
                   model.difficulty != 7

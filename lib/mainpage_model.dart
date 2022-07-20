@@ -171,8 +171,8 @@ class MainPageModel extends ChangeNotifier {
         count += 10;
 
         // 30秒経過したら背景を黒にする
-        if (space < 2500 && count >= 30000) {
-          space += 2;
+        if (space < 3000 && count >= 30000) {
+          space += 3;
           spaceStops += 0.001;
         }
 
@@ -237,22 +237,19 @@ class MainPageModel extends ChangeNotifier {
 
         //雲  --------------------------------------------------
         if (count <= 30000) {
-          if (cloud > 1.2) {
-            cloud = -1.2;
+          if (cloud > 1.5) {
+            cloud = -1.5;
           }
-
           if (cloud2 > 1.5) {
-            cloud2 = -1.2;
+            cloud2 = -1.7;
           }
-
-          if (cloud3 > 1.8) {
-            cloud3 = -1.2;
+          if (cloud3 > 1.5) {
+            cloud3 = -1.8;
           }
-
-          cloud += 0.005;
-          cloud2 += 0.005;
-          cloud3 += 0.005;
         }
+        cloud += 0.005;
+        cloud2 += 0.0047; // todo なぜか落下スピードが早いので調整
+        cloud3 += 0.005;
 
         // 35秒経過したら宇宙ステージ用オブジェクトを出す
         if (count >= 35000) {
