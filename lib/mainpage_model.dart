@@ -121,7 +121,7 @@ class MainPageModel extends ChangeNotifier {
       difficulty = 7;
     }
 
-    /// 難易度ごとに乱数の係数を調整
+    // 難易度ごとに乱数の係数を調整
     ufo_1 = randomDouble(difficulty);
     ufo_075 = randomDouble(difficulty);
     ufo_05 = randomDouble(difficulty);
@@ -253,48 +253,44 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //隕石  --------------------------------------------------
-        if (meteorite > 1.2 && count >= 30000) {
+        if (meteorite > 1.2 && count >= 35000) {
           meteorite = -1.2;
-        } else if (count >= 30000) {
+        } else if (count >= 35000) {
           meteorite += 0.005;
         }
-
-        if (meteorite2 > 1.5 && count >= 30000) {
+        if (meteorite2 > 1.5 && count >= 35000) {
           meteorite2 = -1.2;
-        } else if (count >= 30000) {
+        } else if (count >= 35000) {
           meteorite2 += 0.005;
         }
-
-        if (meteorite3 > 1.8 && count >= 30000) {
+        if (meteorite3 > 1.8 && count >= 35000) {
           meteorite3 = -1.2;
-        } else if (count >= 30000) {
+        } else if (count >= 35000) {
           meteorite3 += 0.005;
         }
 
         // 星 -------------------------------------------------------
         // EASY以外
         if (difficulty != 7) {
-          if (star > 1.2 && count >= 30000) {
+          if (star > 1.2 && count >= 35000) {
             star = -1.2;
-          } else if (count >= 30000) {
+          } else if (count >= 35000) {
             star += 0.005;
           }
         }
-
         // EASY以外またはNORMAL以外
         if (difficulty != 5 || difficulty != 7) {
-          if (star2 > 1.5 && count >= 30000) {
+          if (star2 > 1.5 && count >= 35000) {
             star2 = -1.2;
-          } else if (count >= 30000) {
+          } else if (count >= 35000) {
             star2 += 0.005;
           }
         }
-
         // HARDだったら
         if (difficulty == 2) {
-          if (star3 > 1.8 && count >= 30000) {
+          if (star3 > 1.8 && count >= 35000) {
             star3 = -1.2;
-          } else if (count >= 30000) {
+          } else if (count >= 35000) {
             star3 += 0.005;
           }
         }
