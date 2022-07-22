@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class MainPageModel extends ChangeNotifier {
   /// 表示する画面
@@ -79,9 +80,10 @@ class MainPageModel extends ChangeNotifier {
 
     /// バナー広告をインスタンス化
     myBanner = BannerAd(
-      adUnitId: getTestAdBannerUnitId(),
-
-      //adUnitId: 'ca-app-pub-8474156868822041/2299618878',
+      // ! リリースビルド時に切り替える ------------------------------------------
+      //adUnitId: getTestAdBannerUnitId(),
+      adUnitId: getAdBannerUnitId(),
+      // ! ---------------------------------------------------------------
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -89,6 +91,23 @@ class MainPageModel extends ChangeNotifier {
 
     // バナー広告の読み込み
     myBanner.load();
+  }
+
+  /// プラットフォーム（iOS / Android）に合わせて本番用広告IDを返す
+  String getAdBannerUnitId() {
+    String bannerUnitId = "";
+
+    // Android のとき
+    if (Platform.isAndroid) {
+      // Androidのバナー広告ID
+      bannerUnitId = dotenv.env['BANNER_UNIT_ID_ANDROID']!;
+
+      // iOSのとき
+    } else if (Platform.isIOS) {
+      // iOSのバナー広告ID
+      bannerUnitId = dotenv.env['BANNER_UNIT_ID_IOS']!;
+    }
+    return bannerUnitId;
   }
 
   /// プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
