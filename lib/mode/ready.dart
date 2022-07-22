@@ -41,7 +41,7 @@ class Ready extends StatelessWidget {
                           child: Text(
                             'H O W  T O  P L A Y',
                             style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
                               color: Colors.white,
                             ),
                           ),
@@ -67,7 +67,7 @@ class Ready extends StatelessWidget {
                           child: Text(
                             'B A C K',
                             style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
                               color: Colors.white,
                             ),
                           ),

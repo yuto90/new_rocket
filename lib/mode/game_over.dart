@@ -40,7 +40,7 @@ class GameOver extends StatelessWidget {
                     child: Text(
                       'C O N T I N U E',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),
@@ -65,7 +65,7 @@ class GameOver extends StatelessWidget {
                     child: Text(
                       'E X I T',
                       style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
                           color: Colors.white),
                     ),
                   ),

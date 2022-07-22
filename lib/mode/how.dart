@@ -147,7 +147,7 @@ class How extends StatelessWidget {
                     child: Text(
                       'B A C K',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),

@@ -39,7 +39,7 @@ class Top extends StatelessWidget {
                     child: Text(
                       'H A R D',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),
@@ -63,7 +63,7 @@ class Top extends StatelessWidget {
                     child: Text(
                       'N O R M A L',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),
@@ -87,7 +87,7 @@ class Top extends StatelessWidget {
                     child: Text(
                       'E A S Y',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),

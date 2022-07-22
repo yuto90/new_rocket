@@ -39,7 +39,7 @@ class Clear extends StatelessWidget {
                     child: Text(
                       'E X I T',
                       style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.7,
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
                       ),
                     ),
