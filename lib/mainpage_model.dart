@@ -94,15 +94,15 @@ class MainPageModel extends ChangeNotifier {
   /// プラットフォーム（iOS / Android）に合わせてデモ用広告IDを返す
   String getTestAdBannerUnitId() {
     String testBannerUnitId = "";
-    if (Platform.isAndroid) {
-      /// Android のとき
-      testBannerUnitId = "ca-app-pub-3940256099942544/6300978111";
 
+    // Android のとき
+    if (Platform.isAndroid) {
       // Androidのデモ用バナー広告ID
-      //} else if (Platform.isIOS) {
-      //// iOSのとき
-      //testBannerUnitId =
-      //"ca-app-pub-3940256099942544/2934735716"; /// iOSのデモ用バナー広告ID
+      testBannerUnitId = "ca-app-pub-3940256099942544/6300978111";
+      // iOSのとき
+    } else if (Platform.isIOS) {
+      // iOSのデモ用バナー広告ID
+      testBannerUnitId = "ca-app-pub-3940256099942544/2934735716";
     }
     return testBannerUnitId;
   }
