@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'mode/clear.dart';
 import 'mode/game_over.dart';
@@ -259,6 +260,18 @@ class MainPage extends StatelessWidget {
                   Clear(model: model),
                   // * ゲームオーバー画面
                   GameOver(model: model),
+
+                  model.display == 'clear' || model.display == 'ready'
+                      ? const SizedBox()
+                      : Align(
+                          alignment: Alignment(0, 1),
+                          child: Container(
+                            color: Colors.white.withOpacity(0),
+                            height: SizeConfig.blockSizeVertical! * 8,
+                            width: double.infinity,
+                            child: AdWidget(ad: model.myBanner),
+                          ),
+                        )
                 ],
               ),
             );

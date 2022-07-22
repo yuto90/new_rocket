@@ -71,15 +71,6 @@ class GameOver extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(
-                alignment: Alignment(0, 0.7),
-                child: Container(
-                  color: Colors.white.withOpacity(0),
-                  height: SizeConfig.blockSizeVertical! * 8,
-                  width: double.infinity,
-                  child: AdWidget(ad: model.myBanner),
-                ),
-              )
             ],
           )
         : const SizedBox();
