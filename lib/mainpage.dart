@@ -117,14 +117,12 @@ class MainPage extends StatelessWidget {
                     alignment: Alignment(0, model.goal),
                     child: Goal(heightSize: 20, widthSize: 20),
                   ),
-                  // * ロケット (ゲーム進行中はz-indexを雲より背面にする)
+                  // * ロケット (ゲーム進行中以外はz-indexを雲より前面にする)
                   model.display == 'ready'
                       ? Align(
                           // ロケットの初期位置
                           alignment: Alignment(0, model.rocketYaxis),
-                          child: model.display == 'game_over'
-                              ? Explosion()
-                              : MyRocket(boostFlg: model.boost),
+                          child: MyRocket(boostFlg: model.boost),
                         )
                       : const SizedBox(),
                   // * 障害物 -----------------------------------------------------------
@@ -244,12 +242,14 @@ class MainPage extends StatelessWidget {
 
                   // * ルール説明画面
                   How(model: model),
-                  // * ロケット (ゲーム進行中以外はz-indexを一番前面にする)
+                  // * ロケット (ゲーム進行中はz-indexを雲より背面にする)
                   model.display != 'ready'
                       ? Align(
                           // ロケットの初期位置
                           alignment: Alignment(0, model.rocketYaxis),
-                          child: MyRocket(boostFlg: model.boost),
+                          child: model.display == 'game_over'
+                              ? Explosion()
+                              : MyRocket(boostFlg: model.boost),
                         )
                       : const SizedBox(),
                   // * タイトル画面
