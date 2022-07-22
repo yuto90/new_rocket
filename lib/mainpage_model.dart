@@ -184,6 +184,7 @@ class MainPageModel extends ChangeNotifier {
         // ! 惑星に近づいたらクリア
         if ((goal - rocketYaxis) >= -0.1) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'clear';
         }
 
@@ -312,6 +313,7 @@ class MainPageModel extends ChangeNotifier {
         // Y軸画面外に出たらゲームオーバー
         if (rocketYaxis >= 1.2 || rocketYaxis <= -1.2) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
 
@@ -319,46 +321,55 @@ class MainPageModel extends ChangeNotifier {
         if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
             (rocketYaxis <= -0.9 && rocketYaxis >= -1.1)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo_075 <= 0.1 && ufo_075 >= -0.1) &&
             (rocketYaxis <= -0.65 && rocketYaxis >= -0.85)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo_05 <= 0.1 && ufo_05 >= -0.1) &&
             (rocketYaxis <= -0.4 && rocketYaxis >= -0.6)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo_025 <= 0.1 && ufo_025 >= -0.1) &&
             (rocketYaxis <= -0.15 && rocketYaxis >= -0.35)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo0 <= 0.1 && ufo0 >= -0.1) &&
             (rocketYaxis <= 0.1 && rocketYaxis >= -0.1)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo025 <= 0.1 && ufo025 >= -0.1) &&
             (rocketYaxis <= 0.35 && rocketYaxis >= 0.15)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo05 <= 0.1 && ufo05 >= -0.1) &&
             (rocketYaxis <= 0.6 && rocketYaxis >= 0.4)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo075 <= 0.1 && ufo075 >= -0.1) &&
             (rocketYaxis <= 0.85 && rocketYaxis >= 0.65)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if ((ufo1 <= 0.1 && ufo1 >= -0.1) &&
             (rocketYaxis <= 1.1 && rocketYaxis >= 0.9)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
 
@@ -366,16 +377,19 @@ class MainPageModel extends ChangeNotifier {
         if (((star - rocketYaxis) >= -0.1 && (star - rocketYaxis) <= 0.1) &&
             (star <= 0.15 && star >= -0.15)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if (((star2 - rocketYaxis) >= -0.1 && (star2 - rocketYaxis) <= 0.1) &&
             (star2 <= 0.15 && star2 >= -0.15)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         if (((star3 - rocketYaxis) >= -0.1 && (star3 - rocketYaxis) <= 0.1) &&
             (star3 <= 0.15 && star3 >= -0.15)) {
           timer.cancel();
+          gameHasStarted = false;
           display = 'game_over';
         }
         notifyListeners();
