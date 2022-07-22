@@ -37,6 +37,8 @@ class MainPage extends StatelessWidget {
                   model.move();
                 } else if (model.display == 'ready') {
                   model.startGame(context);
+                } else if (model.display == 'how') {
+                  model.howDemoMove();
                 }
               },
               child: Stack(
@@ -114,14 +116,16 @@ class MainPage extends StatelessWidget {
                     alignment: Alignment(0, model.goal),
                     child: Goal(heightSize: 20, widthSize: 20),
                   ),
-                  // * ロケット ---------------------------------------------------------
-                  Align(
-                    // ロケットの初期位置
-                    alignment: Alignment(0, model.rocketYaxis),
-                    child: model.display == 'game_over'
-                        ? Explosion()
-                        : MyRocket(boostFlg: model.boost),
-                  ),
+                  // * ロケット (ゲーム進行中はz-indexを雲より背面にする)
+                  model.display == 'ready'
+                      ? Align(
+                          // ロケットの初期位置
+                          alignment: Alignment(0, model.rocketYaxis),
+                          child: model.display == 'game_over'
+                              ? Explosion()
+                              : MyRocket(boostFlg: model.boost),
+                        )
+                      : const SizedBox(),
                   // * 障害物 -----------------------------------------------------------
                   Align(
                     alignment: Alignment(model.ufo_1, -1),
@@ -239,6 +243,14 @@ class MainPage extends StatelessWidget {
 
                   // * ルール説明画面
                   How(model: model),
+                  // * ロケット (ゲーム進行中以外はz-indexを一番前面にする)
+                  model.display != 'ready'
+                      ? Align(
+                          // ロケットの初期位置
+                          alignment: Alignment(0, model.rocketYaxis),
+                          child: MyRocket(boostFlg: model.boost),
+                        )
+                      : const SizedBox(),
                   // * タイトル画面
                   Top(model: model),
                   // * ゲーム開始画面

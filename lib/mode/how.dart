@@ -15,6 +15,88 @@ class How extends StatelessWidget {
     return model.display == 'how'
         ? Stack(
             children: [
+              // クリア条件の注釈
+              Align(
+                alignment: Alignment(0, -0.7),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  height: SizeConfig.blockSizeVertical! * 20,
+                  width: SizeConfig.blockSizeHorizontal! * 90,
+                  child: Column(
+                    children: [
+                      Spacer(),
+                      Text(
+                        '-*-*-*-*- 遊び方 -*-*-*-*-',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        'ロケットに迫る障害物を避けて宇宙の惑星を目指そう！',
+                        style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Spacer(),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Spacer(),
+                          Goal(heightSize: 10, widthSize: 10),
+                          Spacer(),
+                          Container(
+                            height: SizeConfig.blockSizeVertical! * 8,
+                            width: SizeConfig.blockSizeHorizontal! * 0.5,
+                            color: Colors.white,
+                          ),
+                          Spacer(),
+                          Row(
+                            children: [
+                              Ufo(),
+                              Star(),
+                            ],
+                          ),
+                          Spacer(),
+                        ],
+                      ),
+                      Row(
+                        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Spacer(flex: 5),
+                          Text(
+                            '惑星',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Spacer(),
+                          Spacer(flex: 8),
+                          Text(
+                            '障害物',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Spacer(flex: 5),
+                        ],
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+
               // ロケットの注釈
               Align(
                 alignment: Alignment(0, 0.16),
@@ -34,72 +116,16 @@ class How extends StatelessWidget {
                     color: Colors.black,
                   ),
                   height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeVertical! * 26,
+                  width: SizeConfig.blockSizeHorizontal! * 75,
                   child: Center(
                     child: Text(
-                      '画面をタップすると上に移動するよ',
+                      '画面をタップするとロケットが上にブースト',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                  ),
-                ),
-              ),
-
-              // クリア条件の注釈
-              Align(
-                alignment: Alignment(0, -0.7),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Colors.black,
-                  ),
-                  height: SizeConfig.blockSizeVertical! * 33,
-                  width: SizeConfig.blockSizeVertical! * 30,
-                  child: Column(
-                    children: [
-                      Text(
-                        '-*-*-*-*- クリア条件 -*-*-*-*-',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Text(
-                        'ロケットが惑星まで到達すること',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.all(SizeConfig.blockSizeVertical! * 0.8),
-                        child: Goal(heightSize: 10, widthSize: 10),
-                      ),
-                      Text(
-                        '※特定の障害物に当たるとゲームオーバー',
-                        style: TextStyle(
-                          fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.all(SizeConfig.blockSizeVertical! * 0.8),
-                        child: Ufo(),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.all(SizeConfig.blockSizeVertical! * 0.8),
-                        child: Star(),
-                      ),
-                    ],
                   ),
                 ),
               ),

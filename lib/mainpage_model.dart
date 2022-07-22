@@ -157,6 +157,28 @@ class MainPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  // how画面にデモ動作を実行させる
+  void howDemoMove() {
+    gameHasStarted = true;
+    move();
+
+    Timer.periodic(Duration(milliseconds: 10), (timer) {
+      time += 0.005;
+      height = -4.5 * time * time + 0.2 + time;
+      rocketYaxis = initialHeight - height;
+
+      if (rocketYaxis > 0) {
+        timer.cancel();
+        gameHasStarted = false;
+        rocketYaxis = 0;
+        time = 0;
+        height = 0;
+        initialHeight = 0;
+      }
+      notifyListeners();
+    });
+  }
+
   // ゲーム開始関数
   void startGame(context) {
     gameHasStarted = true;
