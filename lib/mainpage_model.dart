@@ -81,8 +81,8 @@ class MainPageModel extends ChangeNotifier {
     /// バナー広告をインスタンス化
     myBanner = BannerAd(
       // ! リリースビルド時に切り替える ------------------------------------------
-      //adUnitId: getTestAdBannerUnitId(),
-      adUnitId: getAdBannerUnitId(),
+      adUnitId: getTestAdBannerUnitId(),
+      //adUnitId: getAdBannerUnitId(),
       // ! ---------------------------------------------------------------
       size: AdSize.banner,
       request: const AdRequest(),
@@ -163,17 +163,20 @@ class MainPageModel extends ChangeNotifier {
 
   // ゲーム進行時に画面タップした時
   void move() {
-    time = 0;
-    initialHeight = rocketYaxis;
+    // how画面からready画面に戻った時はmoveさせない
+    if (display != 'ready') {
+      time = 0;
+      initialHeight = rocketYaxis;
 
-    // 1秒だけターボエフェクトを表示
-    boost = true;
-    Future.delayed(Duration(seconds: 1), () {
-      boost = false;
+      // 1秒だけターボエフェクトを表示
+      boost = true;
+      Future.delayed(Duration(seconds: 1), () {
+        boost = false;
+        notifyListeners();
+      });
+
       notifyListeners();
-    });
-
-    notifyListeners();
+    }
   }
 
   // how画面にデモ動作を実行させる
@@ -200,6 +203,7 @@ class MainPageModel extends ChangeNotifier {
 
   // ゲーム開始関数
   void startGame(context) {
+    display = 'play_game';
     gameHasStarted = true;
     Timer.periodic(
       Duration(milliseconds: 10),

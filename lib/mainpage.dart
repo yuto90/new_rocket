@@ -118,7 +118,7 @@ class MainPage extends StatelessWidget {
                     child: Goal(heightSize: 20, widthSize: 20),
                   ),
                   // * ロケット (ゲーム進行中以外はz-indexを雲より前面にする)
-                  model.display == 'ready'
+                  model.display == 'play_game'
                       ? Align(
                           // ロケットの初期位置
                           alignment: Alignment(0, model.rocketYaxis),
@@ -243,7 +243,7 @@ class MainPage extends StatelessWidget {
                   // * ルール説明画面
                   How(model: model),
                   // * ロケット (ゲーム進行中はz-indexを雲より背面にする)
-                  model.display != 'ready'
+                  model.display != 'play_game'
                       ? Align(
                           // ロケットの初期位置
                           alignment: Alignment(0, model.rocketYaxis),
@@ -261,7 +261,9 @@ class MainPage extends StatelessWidget {
                   // * ゲームオーバー画面
                   GameOver(model: model),
 
-                  model.display == 'clear' || model.display == 'ready'
+                  model.display == 'clear' ||
+                          model.display == 'ready' ||
+                          model.display == 'play_game'
                       ? const SizedBox()
                       : Align(
                           alignment: Alignment(0, 1),
