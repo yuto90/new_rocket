@@ -8,7 +8,7 @@ class Office extends StatelessWidget {
       image: AssetImage('lib/images/office.png'),
       fit: BoxFit.cover,
       height: SizeConfig.blockSizeVertical! * 10,
-      width: SizeConfig.blockSizeVertical! * 8,
+      width: SizeConfig.blockSizeHorizontal! * 8,
     );
   }
 }

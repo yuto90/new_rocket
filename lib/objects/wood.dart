@@ -8,7 +8,7 @@ class Wood extends StatelessWidget {
       image: AssetImage('lib/images/wood.png'),
       fit: BoxFit.cover,
       height: SizeConfig.blockSizeVertical! * 10,
-      width: SizeConfig.blockSizeVertical! * 10,
+      width: SizeConfig.blockSizeHorizontal! * 25,
     );
   }
 }

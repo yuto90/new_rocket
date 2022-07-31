@@ -8,7 +8,7 @@ class Building2 extends StatelessWidget {
       image: AssetImage('lib/images/billding2.png'),
       fit: BoxFit.cover,
       height: SizeConfig.blockSizeVertical! * 15,
-      width: SizeConfig.blockSizeVertical! * 9,
+      width: SizeConfig.blockSizeHorizontal! * 20,
     );
   }
 }
