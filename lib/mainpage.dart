@@ -185,19 +185,19 @@ class MainPage extends StatelessWidget {
                     ),
                   ),
                   // * 星 -----------------------------------------------------------
-                  model.difficulty != 7
+                  model.level != 7
                       ? Align(
                           alignment: Alignment((model.star * -1), model.star),
                           child: Star(),
                         )
                       : const SizedBox(),
-                  model.difficulty != 5 || model.difficulty != 7
+                  model.level != 5 || model.level != 7
                       ? Align(
                           alignment: Alignment((model.star2 * -1), model.star2),
                           child: Star(),
                         )
                       : const SizedBox(),
-                  model.difficulty == 2
+                  model.level == 2
                       ? Align(
                           alignment: Alignment((model.star3 * -1), model.star3),
                           child: Star(),

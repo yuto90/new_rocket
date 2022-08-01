@@ -33,11 +33,11 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchDifficulty('hard');
+                      model.switchLevel('3');
                       model.switchDisplay('ready');
                     },
                     child: Text(
-                      'H A R D',
+                      'LEVEL 3',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
@@ -57,11 +57,11 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchDifficulty('normal');
+                      model.switchLevel('2');
                       model.switchDisplay('ready');
                     },
                     child: Text(
-                      'N O R M A L',
+                      'LEVEL 2',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
@@ -81,11 +81,11 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchDifficulty('easy');
+                      model.switchLevel('1');
                       model.switchDisplay('ready');
                     },
                     child: Text(
-                      'E A S Y',
+                      'LEVEL 1',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,

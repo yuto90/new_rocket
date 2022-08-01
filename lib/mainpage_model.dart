@@ -10,7 +10,7 @@ class MainPageModel extends ChangeNotifier {
   String display = 'top';
 
   /// 難易度
-  double difficulty = 1;
+  double level = 1;
 
   /// ロケットのY座標
   double rocketYaxis = 0;
@@ -132,26 +132,26 @@ class MainPageModel extends ChangeNotifier {
   }
 
   /// 難易度設定
-  void switchDifficulty(String diff) {
-    if (diff == 'hard') {
-      difficulty = 2;
-    } else if (diff == 'normal') {
-      difficulty = 5;
+  void switchLevel(String selectedLevel) {
+    if (selectedLevel == '3') {
+      level = 2;
+    } else if (selectedLevel == '2') {
+      level = 5;
     } else {
       /// easy
-      difficulty = 7;
+      level = 7;
     }
 
     // 難易度ごとに乱数の係数を調整
-    ufo_1 = randomDouble(difficulty);
-    ufo_075 = randomDouble(difficulty);
-    ufo_05 = randomDouble(difficulty);
-    ufo_025 = randomDouble(difficulty);
-    ufo0 = randomDouble(difficulty);
-    ufo025 = randomDouble(difficulty);
-    ufo05 = randomDouble(difficulty);
-    ufo075 = randomDouble(difficulty);
-    ufo1 = randomDouble(difficulty);
+    ufo_1 = randomDouble(level);
+    ufo_075 = randomDouble(level);
+    ufo_05 = randomDouble(level);
+    ufo_025 = randomDouble(level);
+    ufo0 = randomDouble(level);
+    ufo025 = randomDouble(level);
+    ufo05 = randomDouble(level);
+    ufo075 = randomDouble(level);
+    ufo1 = randomDouble(level);
     notifyListeners();
   }
 
@@ -236,47 +236,47 @@ class MainPageModel extends ChangeNotifier {
         // UFO -----------------------------------------------
         // 画面外に出たら
         if (ufo_1 < -1.2) {
-          ufo_1 = randomDouble(difficulty);
+          ufo_1 = randomDouble(level);
         } else {
           ufo_1 -= 0.01;
         }
         if (ufo_075 < -1.2) {
-          ufo_075 = randomDouble(difficulty);
+          ufo_075 = randomDouble(level);
         } else {
           ufo_075 -= 0.01;
         }
         if (ufo_05 < -1.2) {
-          ufo_05 = randomDouble(difficulty);
+          ufo_05 = randomDouble(level);
         } else {
           ufo_05 -= 0.01;
         }
         if (ufo_025 < -1.2) {
-          ufo_025 = randomDouble(difficulty);
+          ufo_025 = randomDouble(level);
         } else {
           ufo_025 -= 0.01;
         }
         if (ufo0 < -1.2) {
-          ufo0 = randomDouble(difficulty);
+          ufo0 = randomDouble(level);
         } else {
           ufo0 -= 0.01;
         }
         if (ufo025 < -1.2) {
-          ufo025 = randomDouble(difficulty);
+          ufo025 = randomDouble(level);
         } else {
           ufo025 -= 0.01;
         }
         if (ufo05 < -1.2) {
-          ufo05 = randomDouble(difficulty);
+          ufo05 = randomDouble(level);
         } else {
           ufo05 -= 0.01;
         }
         if (ufo075 < -1.2) {
-          ufo075 = randomDouble(difficulty);
+          ufo075 = randomDouble(level);
         } else {
           ufo075 -= 0.01;
         }
         if (ufo1 < -1.2) {
-          ufo1 = randomDouble(difficulty);
+          ufo1 = randomDouble(level);
         } else {
           ufo1 -= 0.01;
         }
@@ -324,7 +324,7 @@ class MainPageModel extends ChangeNotifier {
 
           // 星 -------------------------------------------------------
           // EASY以外
-          if (difficulty != 7) {
+          if (level != 7) {
             if (star > 1.2) {
               star = -1.2;
             } else {
@@ -332,7 +332,7 @@ class MainPageModel extends ChangeNotifier {
             }
           }
           // EASY以外またはNORMAL以外
-          if (difficulty != 5 || difficulty != 7) {
+          if (level != 5 || level != 7) {
             if (star2 > 1.5) {
               star2 = -1.2;
             } else {
@@ -340,7 +340,7 @@ class MainPageModel extends ChangeNotifier {
             }
           }
           // HARDだったら
-          if (difficulty == 2) {
+          if (level == 2) {
             if (star3 > 1.8) {
               star3 = -1.2;
             } else {
@@ -453,15 +453,15 @@ class MainPageModel extends ChangeNotifier {
     spaceStops = 0;
     count = 0;
 
-    ufo_1 = randomDouble(difficulty);
-    ufo_075 = randomDouble(difficulty);
-    ufo_05 = randomDouble(difficulty);
-    ufo_025 = randomDouble(difficulty);
-    ufo0 = randomDouble(difficulty);
-    ufo025 = randomDouble(difficulty);
-    ufo05 = randomDouble(difficulty);
-    ufo075 = randomDouble(difficulty);
-    ufo1 = randomDouble(difficulty);
+    ufo_1 = randomDouble(level);
+    ufo_075 = randomDouble(level);
+    ufo_05 = randomDouble(level);
+    ufo_025 = randomDouble(level);
+    ufo0 = randomDouble(level);
+    ufo025 = randomDouble(level);
+    ufo05 = randomDouble(level);
+    ufo075 = randomDouble(level);
+    ufo1 = randomDouble(level);
 
     cloud = -1;
     cloud2 = -0.8;
