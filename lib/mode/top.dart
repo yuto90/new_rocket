@@ -33,7 +33,7 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchLevel('3');
+                      model.switchLevel(2.0);
                       model.switchDisplay('ready');
                     },
                     child: Text(
@@ -57,7 +57,7 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchLevel('2');
+                      model.switchLevel(5.0);
                       model.switchDisplay('ready');
                     },
                     child: Text(
@@ -81,7 +81,7 @@ class Top extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchLevel('1');
+                      model.switchLevel(7.0);
                       model.switchDisplay('ready');
                     },
                     child: Text(

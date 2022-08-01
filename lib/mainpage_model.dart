@@ -131,16 +131,9 @@ class MainPageModel extends ChangeNotifier {
     return (Random().nextDouble() + 1) * coefficient;
   }
 
-  /// 難易度設定
-  void switchLevel(String selectedLevel) {
-    if (selectedLevel == '3') {
-      level = 2;
-    } else if (selectedLevel == '2') {
-      level = 5;
-    } else {
-      /// easy
-      level = 7;
-    }
+  /// レベル設定
+  void switchLevel(double selectedLevel) {
+    level = selectedLevel;
 
     // 難易度ごとに乱数の係数を調整
     ufo_1 = randomDouble(level);
