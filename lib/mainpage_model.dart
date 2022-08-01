@@ -12,6 +12,13 @@ class MainPageModel extends ChangeNotifier {
   /// 難易度
   double level = 1;
 
+  /// レベルとUFOの出現頻度のマッピング
+  Map mappingLevel = {
+    1: 7.0,
+    2: 5.0,
+    3: 2.0,
+  };
+
   /// ロケットのY座標
   double rocketYaxis = 0;
 

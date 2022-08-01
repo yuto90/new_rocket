@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:new_rocket/mainpage_model.dart';
 import '../size_config.dart';
 
 class Top extends StatelessWidget {
-  final model;
-  Top({this.model});
+  MainPageModel model;
+  Top({required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -23,74 +24,36 @@ class Top extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0, 0.2),
+                alignment: Alignment(0, 0.3),
                 child: Container(
-                  height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeHorizontal! * 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Colors.black,
-                  ),
-                  child: OutlinedButton(
-                    onPressed: () {
-                      model.switchLevel(2.0);
-                      model.switchDisplay('ready');
+                  height: SizeConfig.blockSizeVertical! * 10,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: model.mappingLevel.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: SizeConfig.blockSizeVertical! * 5,
+                        width: SizeConfig.blockSizeHorizontal! * 33,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.black,
+                        ),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            model.switchLevel(model.mappingLevel[index + 1]);
+                            model.switchDisplay('ready');
+                          },
+                          child: Text(
+                            'LEVEL ' + (index + 1).toString(),
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    child: Text(
-                      'LEVEL 3',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment(0, 0.35),
-                child: Container(
-                  height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeHorizontal! * 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Colors.black,
-                  ),
-                  child: OutlinedButton(
-                    onPressed: () {
-                      model.switchLevel(5.0);
-                      model.switchDisplay('ready');
-                    },
-                    child: Text(
-                      'LEVEL 2',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment(0, 0.5),
-                child: Container(
-                  height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeHorizontal! * 30,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    color: Colors.black,
-                  ),
-                  child: OutlinedButton(
-                    onPressed: () {
-                      model.switchLevel(7.0);
-                      model.switchDisplay('ready');
-                    },
-                    child: Text(
-                      'LEVEL 1',
-                      style: TextStyle(
-                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                        color: Colors.white,
-                      ),
-                    ),
                   ),
                 ),
               ),
