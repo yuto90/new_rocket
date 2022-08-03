@@ -13,10 +13,18 @@ class MainPageModel extends ChangeNotifier {
   double level = 1;
 
   /// レベルとUFOの出現頻度のマッピング
+  /// todo レベル設定
   Map mappingLevel = {
     1: 7.0,
     2: 5.0,
     3: 2.0,
+    4: 2.0,
+    5: 2.0,
+    6: 7.0,
+    7: 5.0,
+    8: 2.0,
+    9: 2.0,
+    10: 2.0,
   };
 
   /// ロケットのY座標

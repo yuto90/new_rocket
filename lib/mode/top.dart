@@ -24,36 +24,74 @@ class Top extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0, 0.3),
-                child: Container(
-                  height: SizeConfig.blockSizeVertical! * 10,
+                alignment: Alignment(0, 0.5),
+                child: SizedBox(
+                  height: SizeConfig.blockSizeVertical! * 25,
                   width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: model.mappingLevel.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        height: SizeConfig.blockSizeVertical! * 5,
-                        width: SizeConfig.blockSizeHorizontal! * 33,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white),
-                          color: Colors.black,
-                        ),
-                        child: OutlinedButton(
-                          onPressed: () {
-                            model.switchLevel(model.mappingLevel[index + 1]);
-                            model.switchDisplay('ready');
-                          },
-                          child: Text(
-                            'LEVEL ' + (index + 1).toString(),
-                            style: TextStyle(
-                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      );
-                    },
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // レベル1~5
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (int i = 1; i <= 5; i++) ...[
+                            Container(
+                              height: SizeConfig.blockSizeVertical! * 8,
+                              width: SizeConfig.blockSizeHorizontal! * 18,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                color: Colors.red,
+                              ),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  model.switchLevel(model.mappingLevel[i]);
+                                  model.switchDisplay('ready');
+                                },
+                                child: Text(
+                                  'LEVEL ' + (i).toString(),
+                                  style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.blockSizeVertical! * 1.5,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ],
+                      ),
+                      // レベル6~10
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          for (int i = 6; i <= 10; i++) ...[
+                            Container(
+                              height: SizeConfig.blockSizeVertical! * 8,
+                              width: SizeConfig.blockSizeHorizontal! * 18,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.white),
+                                color: Colors.red,
+                              ),
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  model.switchLevel(model.mappingLevel[i]);
+                                  model.switchDisplay('ready');
+                                },
+                                child: Text(
+                                  'LEVEL ' + (i).toString(),
+                                  style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.blockSizeVertical! * 1.5,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ],
+                      )
+                    ],
                   ),
                 ),
               ),
