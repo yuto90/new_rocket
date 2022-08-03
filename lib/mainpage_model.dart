@@ -171,8 +171,8 @@ class MainPageModel extends ChangeNotifier {
 
   // ゲーム進行時に画面タップした時
   void move() {
-    // how画面からready画面に戻った時はmoveさせない
-    if (display != 'ready') {
+    // how画面から飛んでる状態でtop画面、ready画面に繊維時はmoveさせない
+    if (display != 'top' && display != 'ready') {
       time = 0;
       initialHeight = rocketYaxis;
 

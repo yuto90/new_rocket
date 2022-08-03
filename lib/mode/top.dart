@@ -121,6 +121,29 @@ class Top extends StatelessWidget {
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment(0, 0.75),
+                child: Container(
+                  height: SizeConfig.blockSizeVertical! * 5,
+                  width: SizeConfig.blockSizeHorizontal! * 40,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    color: Colors.black,
+                  ),
+                  child: OutlinedButton(
+                    onPressed: () {
+                      model.switchDisplay('how');
+                    },
+                    child: Text(
+                      'H O W  T O  P L A Y',
+                      style: TextStyle(
+                        fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           )
         : const SizedBox();

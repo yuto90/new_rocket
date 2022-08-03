@@ -142,7 +142,7 @@ class How extends StatelessWidget {
                   ),
                   child: OutlinedButton(
                     onPressed: () {
-                      model.switchDisplay('ready');
+                      model.switchDisplay('top');
                     },
                     child: Text(
                       'B A C K',
