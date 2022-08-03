@@ -41,20 +41,33 @@ class Top extends StatelessWidget {
                               width: SizeConfig.blockSizeHorizontal! * 18,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white),
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                               child: OutlinedButton(
                                 onPressed: () {
                                   model.switchLevel(model.mappingLevel[i]);
                                   model.switchDisplay('ready');
                                 },
-                                child: Text(
-                                  'LEVEL ' + (i).toString(),
-                                  style: TextStyle(
-                                    fontSize:
-                                        SizeConfig.blockSizeVertical! * 1.5,
-                                    color: Colors.white,
-                                  ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'LEVEL',
+                                      style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! * 1.3,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      (i).toString(),
+                                      style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! * 2,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             )
@@ -71,20 +84,33 @@ class Top extends StatelessWidget {
                               width: SizeConfig.blockSizeHorizontal! * 18,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.white),
-                                color: Colors.red,
+                                color: Colors.black,
                               ),
                               child: OutlinedButton(
                                 onPressed: () {
                                   model.switchLevel(model.mappingLevel[i]);
                                   model.switchDisplay('ready');
                                 },
-                                child: Text(
-                                  'LEVEL ' + (i).toString(),
-                                  style: TextStyle(
-                                    fontSize:
-                                        SizeConfig.blockSizeVertical! * 1.5,
-                                    color: Colors.white,
-                                  ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'LEVEL',
+                                      style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! * 1.3,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Text(
+                                      (i).toString(),
+                                      style: TextStyle(
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical! * 2,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             )
