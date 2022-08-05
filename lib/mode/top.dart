@@ -45,7 +45,7 @@ class Top extends StatelessWidget {
                               ),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  model.switchLevel(model.mappingLevel[i]);
+                                  model.switchLevel(i);
                                   model.switchDisplay('ready');
                                 },
                                 child: Column(
@@ -88,7 +88,7 @@ class Top extends StatelessWidget {
                               ),
                               child: OutlinedButton(
                                 onPressed: () {
-                                  model.switchLevel(model.mappingLevel[i]);
+                                  model.switchLevel(i);
                                   model.switchDisplay('ready');
                                 },
                                 child: Column(

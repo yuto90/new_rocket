@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:new_rocket/mainpage_model.dart';
+import 'package:provider/provider.dart';
 import 'mainpage.dart';
 
 Future<void> main() async {
@@ -24,7 +26,14 @@ class MyApp extends StatelessWidget {
         // アプリ全体にフォントを適用
         textTheme: GoogleFonts.dotGothic16TextTheme(),
       ),
-      home: MainPage(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<MainPageModel>(
+            create: (context) => MainPageModel(),
+          ),
+        ],
+        child: MainPage(),
+      ),
     );
   }
 }
