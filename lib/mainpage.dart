@@ -10,13 +10,15 @@ import 'mode/ready.dart';
 import 'mode/top.dart';
 import 'objects/building.dart';
 import 'objects/building2.dart';
+import 'objects/cloud.dart';
 import 'objects/explosion.dart';
 import 'objects/goal.dart';
+import 'objects/meteorite.dart';
 import 'objects/office.dart';
 import 'objects/rocket.dart';
-import 'level/level4.dart';
-import 'level/level5.dart';
+import 'objects/star.dart';
 import 'objects/tokyo_tower.dart';
+import 'objects/ufo.dart';
 import 'objects/wood.dart';
 
 class MainPage extends StatelessWidget {
@@ -29,7 +31,7 @@ class MainPage extends StatelessWidget {
         builder: (context, model, child) {
           return GestureDetector(
             onTap: () {
-              model.tapAction(context);
+              model.tapAction();
             },
             child: Stack(
               children: [
@@ -114,18 +116,120 @@ class MainPage extends StatelessWidget {
                         child: MyRocket(boostFlg: model.boost),
                       )
                     : const SizedBox(),
-
-                // ! レベル毎に出現オブジェクトを変える -----------------
-                model.selectedLevel == 4
-                    ? Level4(model: model)
+                // * 障害物 -----------------------------------------------------------
+                Align(
+                  alignment: Alignment(model.ufo_1, -1),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo_075, -0.75),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo_05, -0.5),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo_025, -0.25),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo0, 0),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo025, 0.25),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo05, 0.5),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo075, 0.75),
+                  child: Ufo(),
+                ),
+                Align(
+                  alignment: Alignment(model.ufo1, 1),
+                  child: Ufo(),
+                ),
+                // * 雲 -----------------------------------------------------------
+                Align(
+                  alignment: Alignment(0.9, model.cloud),
+                  child: Cloud(
+                    vertical: SizeConfig.blockSizeVertical! * 20,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 60,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(-1, model.cloud2),
+                  child: Cloud(
+                    vertical: SizeConfig.blockSizeVertical! * 15,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 45,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(1, model.cloud3),
+                  child: Cloud(
+                    vertical: SizeConfig.blockSizeVertical! * 20,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 50,
+                  ),
+                ),
+                // * 星 -----------------------------------------------------------
+                model.level != 7
+                    ? Align(
+                        alignment: Alignment((model.star * -1), model.star),
+                        child: Star(),
+                      )
                     : const SizedBox(),
-                model.selectedLevel == 5
-                    ? Level5(model: model)
+                model.level != 5 || model.level != 7
+                    ? Align(
+                        alignment: Alignment((model.star2 * -1), model.star2),
+                        child: Star(),
+                      )
                     : const SizedBox(),
-                model.selectedLevel == 6
-                    ? Level5(model: model)
+                model.level == 2
+                    ? Align(
+                        alignment: Alignment((model.star3 * -1), model.star3),
+                        child: Star(),
+                      )
                     : const SizedBox(),
-                // ! -------------------------------------------
+                // * 隕石 -----------------------------------------------------------
+                Align(
+                  alignment: Alignment(1, model.meteorite),
+                  child: Meteorite(
+                    vertical: SizeConfig.blockSizeVertical! * 18,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 27,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(-0.8, model.meteorite2),
+                  child: Meteorite(
+                    vertical: SizeConfig.blockSizeVertical! * 15,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(0.6, model.meteorite3),
+                  child: Meteorite(
+                    vertical: SizeConfig.blockSizeVertical! * 10,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 20,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(0.8, model.meteorite4),
+                  child: Meteorite(
+                    vertical: SizeConfig.blockSizeVertical! * 16,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 26,
+                  ),
+                ),
+                Align(
+                  alignment: Alignment(-0.6, model.meteorite5),
+                  child: Meteorite(
+                    vertical: SizeConfig.blockSizeVertical! * 18,
+                    horizontal: SizeConfig.blockSizeHorizontal! * 27,
+                  ),
+                ),
 
                 // * ルール説明画面
                 How(model: model),

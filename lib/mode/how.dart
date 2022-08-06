@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../objects/goal.dart';
 import '../objects/star.dart';
 import '../objects/ufo.dart';

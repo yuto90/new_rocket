@@ -16,19 +16,19 @@ class MainPageModel extends ChangeNotifier {
   /// todo レベル設定
   Map mappingLevel = {
     1: 7.0,
-    2: 5.0,
-    3: 2.0,
-    4: 2.0,
-    5: 2.0,
-    6: 7.0,
-    7: 5.0,
-    8: 2.0,
-    9: 2.0,
-    10: 2.0,
+    2: 6.0,
+    3: 5.0,
+    4: 4.0,
+    5: 3.0,
+    6: 2.5,
+    7: 2.0,
+    8: 1.8,
+    9: 1.5,
+    10: 1.2,
   };
 
   /// 選択したレベル
-  int selectedLevel = 5;
+  int selectedLevel = 1;
 
   /// ロケットのY座標
   double rocketYaxis = 0;
@@ -213,8 +213,18 @@ class MainPageModel extends ChangeNotifier {
     });
   }
 
+  void tapAction() {
+    if (gameHasStarted) {
+      move();
+    } else if (display == 'ready') {
+      startGame();
+    } else if (display == 'how') {
+      howDemoMove();
+    }
+  }
+
   // ゲーム開始関数
-  void startLevel5(context) {
+  void startGame() {
     display = 'play_game';
     gameHasStarted = true;
     Timer.periodic(
@@ -223,16 +233,14 @@ class MainPageModel extends ChangeNotifier {
         time += 0.005;
         height = -4.5 * time * time + 0.2 + time;
         rocketYaxis = initialHeight - height;
-        //notifyListeners();
 
+        // 経過時間をカウントする用
         count += 10;
-
         // 30秒経過したら背景を黒にする
         if (space < 3000 && count >= 30000) {
           space += 3;
           spaceStops += 0.001;
         }
-
         // 1分経過したらゴールを画面に表示させる
         if (count >= 60000) {
           goal += 0.005;
@@ -245,55 +253,48 @@ class MainPageModel extends ChangeNotifier {
           display = 'clear';
         }
 
+        // ! 地面 --------------------------------------------------
+        if (ground <= 2) {
+          ground += 0.005;
+        }
+
         // UFO -----------------------------------------------
+        ufo_1 -= 0.01;
+        ufo_075 -= 0.01;
+        ufo_05 -= 0.01;
+        ufo_025 -= 0.01;
+        ufo0 -= 0.01;
+        ufo025 -= 0.01;
+        ufo05 -= 0.01;
+        ufo075 -= 0.01;
+        ufo1 -= 0.01;
+
         // 画面外に出たら
         if (ufo_1 < -1.2) {
           ufo_1 = randomDouble(level);
-        } else {
-          ufo_1 -= 0.01;
-        }
-        if (ufo_075 < -1.2) {
+        } else if (ufo_075 < -1.2) {
           ufo_075 = randomDouble(level);
-        } else {
-          ufo_075 -= 0.01;
-        }
-        if (ufo_05 < -1.2) {
+        } else if (ufo_05 < -1.2) {
           ufo_05 = randomDouble(level);
-        } else {
-          ufo_05 -= 0.01;
-        }
-        if (ufo_025 < -1.2) {
+        } else if (ufo_025 < -1.2) {
           ufo_025 = randomDouble(level);
-        } else {
-          ufo_025 -= 0.01;
-        }
-        if (ufo0 < -1.2) {
+        } else if (ufo0 < -1.2) {
           ufo0 = randomDouble(level);
-        } else {
-          ufo0 -= 0.01;
-        }
-        if (ufo025 < -1.2) {
+        } else if (ufo025 < -1.2) {
           ufo025 = randomDouble(level);
-        } else {
-          ufo025 -= 0.01;
-        }
-        if (ufo05 < -1.2) {
+        } else if (ufo05 < -1.2) {
           ufo05 = randomDouble(level);
-        } else {
-          ufo05 -= 0.01;
-        }
-        if (ufo075 < -1.2) {
+        } else if (ufo075 < -1.2) {
           ufo075 = randomDouble(level);
-        } else {
-          ufo075 -= 0.01;
-        }
-        if (ufo1 < -1.2) {
+        } else if (ufo1 < -1.2) {
           ufo1 = randomDouble(level);
-        } else {
-          ufo1 -= 0.01;
         }
 
         //雲  --------------------------------------------------
+        // 地球ステージの時
+        cloud += 0.005;
+        cloud2 += 0.0047; // todo なぜか落下スピードが早いので調整
+        cloud3 += 0.005;
         if (count <= 30000) {
           if (cloud > 1.5) {
             cloud = -1.5;
@@ -305,13 +306,16 @@ class MainPageModel extends ChangeNotifier {
             cloud3 = -1.8;
           }
         }
-        cloud += 0.005;
-        cloud2 += 0.0047; // todo なぜか落下スピードが早いので調整
-        cloud3 += 0.005;
 
         // 35秒経過したら宇宙ステージ用オブジェクトを出す
         if (count >= 35000) {
           //隕石  --------------------------------------------------
+          meteorite += 0.005;
+          meteorite2 += 0.005;
+          meteorite3 += 0.005;
+          meteorite4 += 0.005;
+          meteorite5 += 0.005;
+
           if (meteorite > 1.5) {
             meteorite = -1.5;
           }
@@ -327,12 +331,6 @@ class MainPageModel extends ChangeNotifier {
           if (meteorite5 > 1.9) {
             meteorite5 = -1.8;
           }
-
-          meteorite += 0.005;
-          meteorite2 += 0.005;
-          meteorite3 += 0.005;
-          meteorite4 += 0.005;
-          meteorite5 += 0.005;
 
           // 星 -------------------------------------------------------
           // EASY以外
@@ -359,11 +357,6 @@ class MainPageModel extends ChangeNotifier {
               star3 += 0.005;
             }
           }
-        }
-
-        // 地面 --------------------------------------------------
-        if (ground <= 2) {
-          ground += 0.005;
         }
 
         //! 当たり判定 ======================================================
@@ -452,172 +445,6 @@ class MainPageModel extends ChangeNotifier {
         notifyListeners();
       },
     );
-  }
-
-  void startLevel4(context) {
-    display = 'play_game';
-    gameHasStarted = true;
-    Timer.periodic(
-      Duration(milliseconds: 10),
-      (timer) {
-        time += 0.005;
-        height = -4.5 * time * time + 0.2 + time;
-        rocketYaxis = initialHeight - height;
-        //notifyListeners();
-
-        count += 10;
-
-        // 30秒経過したら背景を黒にする
-        if (space < 3000 && count >= 30000) {
-          space += 3;
-          spaceStops += 0.001;
-        }
-
-        // 1分経過したらゴールを画面に表示させる
-        if (count >= 60000) {
-          goal += 0.005;
-        }
-
-        // ! 惑星に近づいたらクリア
-        if ((goal - rocketYaxis) >= -0.1) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'clear';
-        }
-
-        // UFO -----------------------------------------------
-        // 画面外に出たら
-        if (ufo_1 < -1.2) {
-          ufo_1 = randomDouble(level);
-        } else {
-          ufo_1 -= 0.01;
-        }
-
-        //雲  --------------------------------------------------
-        if (count <= 30000) {
-          if (cloud > 1.5) {
-            cloud = -1.5;
-          }
-          if (cloud2 > 1.5) {
-            cloud2 = -1.7;
-          }
-          if (cloud3 > 1.5) {
-            cloud3 = -1.8;
-          }
-        }
-        cloud += 0.005;
-        cloud2 += 0.0047; // todo なぜか落下スピードが早いので調整
-        cloud3 += 0.005;
-
-        // 35秒経過したら宇宙ステージ用オブジェクトを出す
-        if (count >= 35000) {
-          //隕石  --------------------------------------------------
-          if (meteorite > 1.5) {
-            meteorite = -1.5;
-          }
-          if (meteorite2 > 2) {
-            meteorite2 = -1.8;
-          }
-          if (meteorite3 > 1.7) {
-            meteorite3 = -2.0;
-          }
-          if (meteorite4 > 1.6) {
-            meteorite4 = -1.5;
-          }
-          if (meteorite5 > 1.9) {
-            meteorite5 = -1.8;
-          }
-
-          meteorite += 0.005;
-          meteorite2 += 0.005;
-          meteorite3 += 0.005;
-          meteorite4 += 0.005;
-          meteorite5 += 0.005;
-
-          // 星 -------------------------------------------------------
-          // EASY以外
-          if (level != 7) {
-            if (star > 1.2) {
-              star = -1.2;
-            } else {
-              star += 0.005;
-            }
-          }
-          // EASY以外またはNORMAL以外
-          if (level != 5 || level != 7) {
-            if (star2 > 1.5) {
-              star2 = -1.2;
-            } else {
-              star2 += 0.005;
-            }
-          }
-          // HARDだったら
-          if (level == 2) {
-            if (star3 > 1.8) {
-              star3 = -1.2;
-            } else {
-              star3 += 0.005;
-            }
-          }
-        }
-
-        // 地面 --------------------------------------------------
-        if (ground <= 2) {
-          ground += 0.005;
-        }
-
-        //! 当たり判定 ======================================================
-        // Y軸画面外に出たらゲームオーバー
-        if (rocketYaxis >= 1.2 || rocketYaxis <= -1.2) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-
-        // ufoの当たり判定
-        if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
-            (rocketYaxis <= -0.9 && rocketYaxis >= -1.1)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-
-        // 星の当たり判定
-        if (((star - rocketYaxis) >= -0.1 && (star - rocketYaxis) <= 0.1) &&
-            (star <= 0.15 && star >= -0.15)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if (((star2 - rocketYaxis) >= -0.1 && (star2 - rocketYaxis) <= 0.1) &&
-            (star2 <= 0.15 && star2 >= -0.15)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if (((star3 - rocketYaxis) >= -0.1 && (star3 - rocketYaxis) <= 0.1) &&
-            (star3 <= 0.15 && star3 >= -0.15)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        notifyListeners();
-      },
-    );
-  }
-
-  void tapAction(context) {
-    if (gameHasStarted) {
-      move();
-    } else if (display == 'ready') {
-      if (selectedLevel == 4) {
-        startLevel4(context);
-      } else if (selectedLevel == 5) {
-        startLevel5(context);
-      }
-    } else if (display == 'how') {
-      howDemoMove();
-    }
   }
 
   /// パラメータのリセット
