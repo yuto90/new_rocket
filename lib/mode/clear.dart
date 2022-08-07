@@ -31,11 +31,7 @@ class Clear extends StatelessWidget {
                     color: Colors.black,
                   ),
                   child: OutlinedButton(
-                    onPressed: () {
-                      //model.switchDisplay();
-                      model.display = 'top';
-                      model.resetPosition();
-                    },
+                    onPressed: () => model.clearLevel(),
                     child: Text(
                       'E X I T',
                       style: TextStyle(

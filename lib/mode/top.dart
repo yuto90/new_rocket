@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_rocket/mainpage_model.dart';
+import 'package:new_rocket/objects/lock.dart';
 import '../size_config.dart';
 
 class Top extends StatelessWidget {
@@ -23,6 +24,33 @@ class Top extends StatelessWidget {
                   ),
                 ),
               ),
+              // todo デバッグボタン ----------------------------------------------
+              model.debugMode
+                  ? Align(
+                      alignment: Alignment(0, -0.4),
+                      child: Container(
+                        height: SizeConfig.blockSizeVertical! * 5,
+                        width: SizeConfig.blockSizeHorizontal! * 40,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          color: Colors.black,
+                        ),
+                        child: OutlinedButton(
+                          onPressed: () {
+                            model.debug();
+                          },
+                          child: Text(
+                            'デバッグ',
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
+              // todo デバッグボタン ----------------------------------------------
               Align(
                 alignment: Alignment(0, 0.5),
                 child: SizedBox(
@@ -31,92 +59,84 @@ class Top extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // レベル1~5
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          for (int i = 1; i <= 5; i++) ...[
-                            Container(
-                              height: SizeConfig.blockSizeVertical! * 8,
-                              width: SizeConfig.blockSizeHorizontal! * 18,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                color: Colors.black,
-                              ),
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  model.switchLevel(i);
-                                  model.switchDisplay('ready');
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'LEVEL',
-                                      style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! * 1.3,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      (i).toString(),
-                                      style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! * 2,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ],
+                      FutureBuilder(
+                        future: model.getClearLevel(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<int> snapshot) {
+                          if (snapshot.hasData) {
+                            return Wrap(
+                              spacing: SizeConfig.blockSizeHorizontal! * 2,
+                              runSpacing: SizeConfig.blockSizeVertical! * 1,
+                              children: [
+                                for (int i = 1; i <= 10; i++) ...[
+                                  snapshot.data! < i
+                                      ? Container(
+                                          height:
+                                              SizeConfig.blockSizeVertical! * 8,
+                                          width:
+                                              SizeConfig.blockSizeHorizontal! *
+                                                  18,
+                                          decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.white),
+                                            color: Colors.black,
+                                          ),
+                                          child: Center(
+                                            child: Lock(),
+                                          ),
+                                        )
+                                      : Container(
+                                          height:
+                                              SizeConfig.blockSizeVertical! * 8,
+                                          width:
+                                              SizeConfig.blockSizeHorizontal! *
+                                                  18,
+                                          decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.white),
+                                            color: Colors.black,
+                                          ),
+                                          child: OutlinedButton(
+                                            onPressed: () {
+                                              model.switchLevel(i);
+                                              model.switchDisplay('ready');
+                                            },
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  'LEVEL',
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                        1.3,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  (i).toString(),
+                                                  style: TextStyle(
+                                                    fontSize: SizeConfig
+                                                            .blockSizeVertical! *
+                                                        2,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        )
+                                ],
+                              ],
+                            );
+                          }
+
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       ),
-                      // レベル6~10
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          for (int i = 6; i <= 10; i++) ...[
-                            Container(
-                              height: SizeConfig.blockSizeVertical! * 8,
-                              width: SizeConfig.blockSizeHorizontal! * 18,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                color: Colors.black,
-                              ),
-                              child: OutlinedButton(
-                                onPressed: () {
-                                  model.switchLevel(i);
-                                  model.switchDisplay('ready');
-                                },
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'LEVEL',
-                                      style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! * 1.3,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      (i).toString(),
-                                      style: TextStyle(
-                                        fontSize:
-                                            SizeConfig.blockSizeVertical! * 2,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ],
-                      )
                     ],
                   ),
                 ),

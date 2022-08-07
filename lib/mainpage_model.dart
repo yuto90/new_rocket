@@ -4,8 +4,19 @@ import 'dart:math';
 import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPageModel extends ChangeNotifier {
+  // todo リリースビルド時は【false】に切り替える ------------------------------------------
+  bool debugMode = false;
+
+  // todo デバッグ用
+  void debug() {
+    //pref.setInt('clearLevel', 1);
+    print(pref.getInt('clearLevel') ?? 0);
+    notifyListeners();
+  }
+
   /// 表示する画面
   String display = 'top';
 
@@ -86,6 +97,9 @@ class MainPageModel extends ChangeNotifier {
   /// 広告バナー
   late BannerAd myBanner;
 
+  /// ローカルストレージ
+  late SharedPreferences pref;
+
   /// initState的なやつ
   MainPageModel() {
     initValue();
@@ -94,10 +108,7 @@ class MainPageModel extends ChangeNotifier {
   void initValue() {
     /// バナー広告をインスタンス化
     myBanner = BannerAd(
-      // todo リリースビルド時に切り替える ------------------------------------------
-      adUnitId: getTestAdBannerUnitId(),
-      //adUnitId: getAdBannerUnitId(),
-      // todo ---------------------------------------------------------------
+      adUnitId: debugMode ? getTestAdBannerUnitId() : getAdBannerUnitId(),
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -105,6 +116,15 @@ class MainPageModel extends ChangeNotifier {
 
     // バナー広告の読み込み
     myBanner.load();
+  }
+
+  /// どこまでレベルをクリアしているかを取得
+  Future<int> getClearLevel() async {
+    int clearLevelNumber;
+    pref = await SharedPreferences.getInstance();
+    clearLevelNumber = pref.getInt('clearLevel') ?? 1;
+
+    return clearLevelNumber;
   }
 
   /// プラットフォーム（iOS / Android）に合わせて本番用広告IDを返す
@@ -143,11 +163,6 @@ class MainPageModel extends ChangeNotifier {
   /// オブジェクト位置リセット用の乱数を生成
   double randomDouble(double coefficient) {
     return (Random().nextDouble() + 1) * coefficient;
-  }
-
-  /// 用の乱数を生成
-  double moveRandomDouble() {
-    return Random().nextDouble() * 0.015;
   }
 
   /// レベル設定
@@ -355,12 +370,12 @@ class MainPageModel extends ChangeNotifier {
         }
 
         //! 当たり判定 ======================================================
-        //// Y軸画面外に出たらゲームオーバー
-        //if (rocketYaxis >= 1.2 || rocketYaxis <= -1.2) {
-        //timer.cancel();
-        //gameHasStarted = false;
-        //display = 'game_over';
-        //}
+        // Y軸画面外に出たらゲームオーバー
+        if (!debugMode && (rocketYaxis >= 1.2 || rocketYaxis <= -1.2)) {
+          timer.cancel();
+          gameHasStarted = false;
+          display = 'game_over';
+        }
 
         // ufoの当たり判定
         if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
@@ -440,6 +455,18 @@ class MainPageModel extends ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  /// ステージクリア時の処理
+  void clearLevel() {
+    int displayLevel = pref.getInt('clearLevel') ?? 0;
+    // 画面に表示されている最大レベルをクリアしたら次のレベルを開放する
+    if (displayLevel == selectedLevel && displayLevel != 10) {
+      pref.setInt('clearLevel', displayLevel + 1);
+    }
+
+    display = 'top';
+    resetPosition();
   }
 
   /// パラメータのリセット
