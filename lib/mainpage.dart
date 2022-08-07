@@ -116,7 +116,7 @@ class MainPage extends StatelessWidget {
                         child: MyRocket(boostFlg: model.boost),
                       )
                     : const SizedBox(),
-                // * 障害物 -----------------------------------------------------------
+                // * UFO -----------------------------------------------------------
                 Align(
                   alignment: Alignment(model.ufo_1, -1),
                   child: Ufo(),
@@ -176,19 +176,19 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 // * 星 -----------------------------------------------------------
-                model.level != 7
+                model.selectedLevel >= 6
                     ? Align(
                         alignment: Alignment((model.star * -1), model.star),
                         child: Star(),
                       )
                     : const SizedBox(),
-                model.level != 5 || model.level != 7
+                model.selectedLevel >= 8
                     ? Align(
                         alignment: Alignment((model.star2 * -1), model.star2),
                         child: Star(),
                       )
                     : const SizedBox(),
-                model.level == 2
+                model.selectedLevel >= 10
                     ? Align(
                         alignment: Alignment((model.star3 * -1), model.star3),
                         child: Star(),

@@ -11,15 +11,14 @@ class MainPageModel extends ChangeNotifier {
 
   /// 難易度
   double level = 1;
-
+  // todo レベル設定
   /// レベルとUFOの出現頻度のマッピング
-  /// todo レベル設定
   Map mappingLevel = {
-    1: 7.0,
-    2: 6.0,
-    3: 5.0,
-    4: 4.0,
-    5: 3.0,
+    1: 8.0,
+    2: 7.0,
+    3: 6.0,
+    4: 5.0,
+    5: 4.0,
     6: 2.5,
     7: 2.0,
     8: 1.8,
@@ -40,7 +39,6 @@ class MainPageModel extends ChangeNotifier {
 
   /// ゲーム開始中フラグ
   bool gameHasStarted = false;
-
   // 障害物
   double ufo_1 = 2;
   double ufo_075 = 2;
@@ -76,7 +74,6 @@ class MainPageModel extends ChangeNotifier {
   double space = 0;
   double spaceStops = 0;
 
-  /// グラデーション用
   /// ゴール
   double goal = -3;
 
@@ -86,6 +83,7 @@ class MainPageModel extends ChangeNotifier {
   /// ブーストフラグ
   bool boost = false;
 
+  /// 広告バナー
   late BannerAd myBanner;
 
   /// initState的なやつ
@@ -94,14 +92,12 @@ class MainPageModel extends ChangeNotifier {
   }
 
   void initValue() {
-    //print('init');
-
     /// バナー広告をインスタンス化
     myBanner = BannerAd(
-      // ! リリースビルド時に切り替える ------------------------------------------
+      // todo リリースビルド時に切り替える ------------------------------------------
       adUnitId: getTestAdBannerUnitId(),
       //adUnitId: getAdBannerUnitId(),
-      // ! ---------------------------------------------------------------
+      // todo ---------------------------------------------------------------
       size: AdSize.banner,
       request: const AdRequest(),
       listener: const BannerAdListener(),
@@ -147,6 +143,11 @@ class MainPageModel extends ChangeNotifier {
   /// オブジェクト位置リセット用の乱数を生成
   double randomDouble(double coefficient) {
     return (Random().nextDouble() + 1) * coefficient;
+  }
+
+  /// 用の乱数を生成
+  double moveRandomDouble() {
+    return Random().nextDouble() * 0.015;
   }
 
   /// レベル設定
@@ -333,39 +334,33 @@ class MainPageModel extends ChangeNotifier {
           }
 
           // 星 -------------------------------------------------------
-          // EASY以外
-          if (level != 7) {
+          if (selectedLevel >= 6) {
+            star += 0.005;
             if (star > 1.2) {
               star = -1.2;
-            } else {
-              star += 0.005;
             }
           }
-          // EASY以外またはNORMAL以外
-          if (level != 5 || level != 7) {
+          if (selectedLevel >= 8) {
+            star2 += 0.005;
             if (star2 > 1.5) {
               star2 = -1.2;
-            } else {
-              star2 += 0.005;
             }
           }
-          // HARDだったら
-          if (level == 2) {
-            if (star3 > 1.8) {
+          if (selectedLevel >= 10) {
+            star3 += 0.005;
+            if (star3 > 2) {
               star3 = -1.2;
-            } else {
-              star3 += 0.005;
             }
           }
         }
 
         //! 当たり判定 ======================================================
-        // Y軸画面外に出たらゲームオーバー
-        if (rocketYaxis >= 1.2 || rocketYaxis <= -1.2) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
+        //// Y軸画面外に出たらゲームオーバー
+        //if (rocketYaxis >= 1.2 || rocketYaxis <= -1.2) {
+        //timer.cancel();
+        //gameHasStarted = false;
+        //display = 'game_over';
+        //}
 
         // ufoの当たり判定
         if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
