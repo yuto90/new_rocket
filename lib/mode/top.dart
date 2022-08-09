@@ -101,26 +101,45 @@ class Top extends StatelessWidget {
                                               model.switchLevel(i);
                                               model.switchDisplay('ready');
                                             },
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
+                                            child: Stack(
                                               children: [
-                                                Text(
-                                                  'LEVEL',
-                                                  style: TextStyle(
-                                                    fontSize: SizeConfig
-                                                            .blockSizeVertical! *
-                                                        1.3,
-                                                    color: Colors.white,
+                                                model.isClear(i)
+                                                    ? Align(
+                                                        alignment:
+                                                            Alignment(0, 1),
+                                                        child: Text(
+                                                          'CLEAR',
+                                                          style: TextStyle(
+                                                            fontSize: SizeConfig
+                                                                    .blockSizeVertical! *
+                                                                1.7,
+                                                            color: Colors.green,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : const SizedBox(),
+                                                Align(
+                                                  alignment: Alignment(0, -0.8),
+                                                  child: Text(
+                                                    'LEVEL',
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                              .blockSizeVertical! *
+                                                          1.3,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                 ),
-                                                Text(
-                                                  (i).toString(),
-                                                  style: TextStyle(
-                                                    fontSize: SizeConfig
-                                                            .blockSizeVertical! *
-                                                        2,
-                                                    color: Colors.white,
+                                                Align(
+                                                  alignment: Alignment(0, 0),
+                                                  child: Text(
+                                                    (i).toString(),
+                                                    style: TextStyle(
+                                                      fontSize: SizeConfig
+                                                              .blockSizeVertical! *
+                                                          2,
+                                                      color: Colors.white,
+                                                    ),
                                                   ),
                                                 ),
                                               ],

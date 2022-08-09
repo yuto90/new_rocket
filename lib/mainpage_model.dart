@@ -12,8 +12,8 @@ class MainPageModel extends ChangeNotifier {
 
   // todo デバッグ用
   void debug() {
-    //pref.setInt('clearLevel', 1);
-    print(pref.getInt('clearLevel') ?? 0);
+    //pref.setInt('clearLevel', 8);
+    print(pref.getInt('clearLevel') ?? 1);
     notifyListeners();
   }
 
@@ -461,12 +461,18 @@ class MainPageModel extends ChangeNotifier {
   void clearLevel() {
     int displayLevel = pref.getInt('clearLevel') ?? 0;
     // 画面に表示されている最大レベルをクリアしたら次のレベルを開放する
-    if (displayLevel == selectedLevel && displayLevel != 10) {
+    if (displayLevel == selectedLevel) {
       pref.setInt('clearLevel', displayLevel + 1);
     }
 
     display = 'top';
     resetPosition();
+  }
+
+  /// ステージをクリアしているか判定
+  bool isClear(int level) {
+    int displayLevel = pref.getInt('clearLevel') ?? 0;
+    return displayLevel > level;
   }
 
   /// パラメータのリセット
