@@ -54,49 +54,30 @@ class Top extends StatelessWidget {
               Align(
                 alignment: Alignment(0, 0.5),
                 child: SizedBox(
-                  height: SizeConfig.blockSizeVertical! * 25,
+                  height: SizeConfig.blockSizeVertical! * 18,
                   width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FutureBuilder(
-                        future: model.getClearLevel(),
-                        builder: (BuildContext context,
-                            AsyncSnapshot<int> snapshot) {
-                          if (snapshot.hasData) {
-                            return Wrap(
-                              spacing: SizeConfig.blockSizeHorizontal! * 2,
-                              runSpacing: SizeConfig.blockSizeVertical! * 1,
-                              children: [
-                                for (int i = 1; i <= 10; i++) ...[
-                                  snapshot.data! < i
-                                      ? Container(
-                                          height:
-                                              SizeConfig.blockSizeVertical! * 8,
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  18,
-                                          decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.white),
-                                            color: Colors.black,
-                                          ),
-                                          child: Center(
-                                            child: Lock(),
-                                          ),
-                                        )
-                                      : Container(
-                                          height:
-                                              SizeConfig.blockSizeVertical! * 8,
-                                          width:
-                                              SizeConfig.blockSizeHorizontal! *
-                                                  18,
-                                          decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.white),
-                                            color: Colors.black,
-                                          ),
-                                          child: OutlinedButton(
+                  child: FutureBuilder(
+                    future: model.getClearLevel(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<int> snapshot) {
+                      if (snapshot.hasData) {
+                        return Center(
+                          child: Wrap(
+                            spacing: SizeConfig.blockSizeHorizontal! * 2,
+                            runSpacing: SizeConfig.blockSizeVertical! * 1,
+                            children: [
+                              for (int i = 1; i <= 10; i++) ...[
+                                Container(
+                                  height: SizeConfig.blockSizeVertical! * 8,
+                                  width: SizeConfig.blockSizeHorizontal! * 18,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    color: Colors.black,
+                                  ),
+                                  child: Center(
+                                    child: snapshot.data! < i
+                                        ? Lock()
+                                        : OutlinedButton(
                                             onPressed: () {
                                               model.switchLevel(i);
                                               model.switchDisplay('ready');
@@ -145,18 +126,18 @@ class Top extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                        )
-                                ],
+                                  ),
+                                )
                               ],
-                            );
-                          }
+                            ],
+                          ),
+                        );
+                      }
 
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      ),
-                    ],
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                   ),
                 ),
               ),
