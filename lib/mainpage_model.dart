@@ -8,11 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPageModel extends ChangeNotifier {
   // todo リリースビルド時は【false】に切り替える ------------------------------------------
-  bool debugMode = false;
+  bool debugMode = true;
 
   // todo デバッグ用
   void debug() {
-    //pref.setInt('clearLevel', 8);
+    //pref.setInt('clearLevel', 1);
     print(pref.getInt('clearLevel') ?? 1);
     notifyListeners();
   }
@@ -459,9 +459,13 @@ class MainPageModel extends ChangeNotifier {
 
   /// ステージクリア時の処理
   void clearLevel() {
-    int displayLevel = pref.getInt('clearLevel') ?? 0;
+    int? displayLevel = pref.getInt('clearLevel');
+    // レベル1を初めてクリアした時はまだ値がセットされておらずnullになるので値を入れておく
+    if (displayLevel == null) {
+      pref.setInt('clearLevel', 2);
+    }
     // 画面に表示されている最大レベルをクリアしたら次のレベルを開放する
-    if (displayLevel == selectedLevel) {
+    else if (displayLevel == selectedLevel) {
       pref.setInt('clearLevel', displayLevel + 1);
     }
 
