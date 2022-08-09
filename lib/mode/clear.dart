@@ -12,6 +12,16 @@ class Clear extends StatelessWidget {
         ? Stack(
             children: [
               Align(
+                alignment: Alignment(0, -0.3),
+                child: Text(
+                  'L E V E L ' + model.selectedLevel.toString(),
+                  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 2,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Align(
                 alignment: Alignment(0, -0.2),
                 child: Text(
                   'C L E A R !!!',
@@ -22,7 +32,7 @@ class Clear extends StatelessWidget {
                 ),
               ),
               Align(
-                alignment: Alignment(0, 0.35),
+                alignment: Alignment(0, 0.3),
                 child: Container(
                   height: SizeConfig.blockSizeVertical! * 5,
                   width: SizeConfig.blockSizeHorizontal! * 30,
