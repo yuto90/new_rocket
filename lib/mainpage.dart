@@ -8,18 +8,14 @@ import 'mode/game_over.dart';
 import 'mode/how.dart';
 import 'mode/ready.dart';
 import 'mode/top.dart';
-import 'objects/building.dart';
-import 'objects/building2.dart';
 import 'objects/cloud.dart';
 import 'objects/explosion.dart';
 import 'objects/goal.dart';
 import 'objects/meteorite.dart';
-import 'objects/office.dart';
 import 'objects/rocket.dart';
 import 'objects/star.dart';
-import 'objects/tokyo_tower.dart';
 import 'objects/ufo.dart';
-import 'objects/wood.dart';
+import 'package:new_rocket/grount.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -59,50 +55,7 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 // * 地面 ----------------------------------------------------------
-                Align(
-                  alignment: Alignment(0.6, model.ground),
-                  child: Building2(),
-                ),
-                Align(
-                  alignment: Alignment(-1.3, model.ground),
-                  child: Building2(),
-                ),
-                Align(
-                  alignment: Alignment(-0.1, model.ground),
-                  child: Office(),
-                ),
-                Align(
-                  alignment: Alignment(1.2, model.ground),
-                  child: Building2(),
-                ),
-                Align(
-                  alignment: Alignment(1.1, model.ground),
-                  child: TokyoTower(),
-                ),
-                Align(
-                  alignment: Alignment(1.1, model.ground),
-                  child: Wood(),
-                ),
-                Align(
-                  alignment: Alignment(-0.9, model.ground),
-                  child: Office(),
-                ),
-                Align(
-                  alignment: Alignment(0.2, model.ground),
-                  child: Building(),
-                ),
-                Align(
-                  alignment: Alignment(0, model.ground),
-                  child: Wood(),
-                ),
-                Align(
-                  alignment: Alignment(-0.8, model.ground),
-                  child: Building(),
-                ),
-                Align(
-                  alignment: Alignment(-0.4, model.ground),
-                  child: Building2(),
-                ),
+                ...Ground().tokyo(model),
                 // * ゴール -----------------------------------------------------------
                 Align(
                   alignment: Alignment(0, model.goal),
