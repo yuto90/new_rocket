@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:new_rocket/mainpage_model.dart';
-import 'package:new_rocket/size_config.dart';
 import 'objects/building.dart';
 import 'objects/building2.dart';
 import 'objects/office.dart';

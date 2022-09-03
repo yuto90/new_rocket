@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPageModel extends ChangeNotifier {
   // todo リリースビルド時は【false】に切り替える ------------------------------------------
-  bool debugMode = true;
+  bool debugMode = false;
 
   // todo デバッグ用
   void debug() {
