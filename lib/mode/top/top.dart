@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_rocket/mainpage_model.dart';
 import 'package:new_rocket/objects/lock.dart';
-import '../size_config.dart';
+import '../../size_config.dart';
 
 class Top extends StatelessWidget {
   MainPageModel model;

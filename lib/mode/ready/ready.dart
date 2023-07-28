@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import '../size_config.dart';
+import 'package:new_rocket/mainpage_model.dart';
+import '../../size_config.dart';
 
-class Clear extends StatelessWidget {
-  final model;
-  Clear({this.model});
+class Ready extends StatelessWidget {
+  final MainPageModel model;
+  Ready({required this.model});
 
   @override
   Widget build(BuildContext context) {
-    // * クリア画面
-    return model.display == 'clear'
+    // * ゲーム開始画面
+    return model.display == 'ready'
         ? Stack(
             children: [
               Align(
@@ -24,26 +25,29 @@ class Clear extends StatelessWidget {
               Align(
                 alignment: Alignment(0, -0.2),
                 child: Text(
-                  'C L E A R !!!',
+                  'T A P  T O  P L A Y',
                   style: TextStyle(
                     fontSize: SizeConfig.blockSizeVertical! * 2,
                     color: Colors.white,
                   ),
                 ),
               ),
+              // 戻るボタン
               Align(
                 alignment: Alignment(0, 0.3),
                 child: Container(
                   height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeHorizontal! * 30,
+                  width: SizeConfig.blockSizeHorizontal! * 40,
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.white),
                     color: Colors.black,
                   ),
                   child: OutlinedButton(
-                    onPressed: () => model.clearLevel(),
+                    onPressed: () {
+                      model.switchDisplay('top');
+                    },
                     child: Text(
-                      'E X I T',
+                      'B A C K',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,

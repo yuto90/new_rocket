@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../objects/goal.dart';
-import '../objects/star.dart';
-import '../objects/ufo.dart';
-import '../size_config.dart';
+import '../../objects/goal.dart';
+import '../../objects/star.dart';
+import '../../objects/ufo.dart';
+import '../../size_config.dart';
 
 class How extends StatelessWidget {
   final model;
