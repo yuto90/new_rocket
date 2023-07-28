@@ -15,7 +15,7 @@ import 'objects/meteorite.dart';
 import 'objects/rocket.dart';
 import 'objects/star.dart';
 import 'objects/ufo.dart';
-import 'package:new_rocket/grount.dart';
+import 'package:new_rocket/ground.dart';
 
 class MainPage extends StatelessWidget {
   @override
