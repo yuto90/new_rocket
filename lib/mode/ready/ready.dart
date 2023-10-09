@@ -25,7 +25,7 @@ class Ready extends StatelessWidget {
               Align(
                 alignment: Alignment(0, -0.2),
                 child: Text(
-                  'T A P  T O  P L A Y',
+                  '画面をタップしたらスタートするよ',
                   style: TextStyle(
                     fontSize: SizeConfig.blockSizeVertical! * 2,
                     color: Colors.white,
@@ -47,7 +47,7 @@ class Ready extends StatelessWidget {
                       model.switchDisplay('top');
                     },
                     child: Text(
-                      'B A C K',
+                      'トップに戻る',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,

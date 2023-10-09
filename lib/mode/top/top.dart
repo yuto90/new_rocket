@@ -155,7 +155,7 @@ class Top extends StatelessWidget {
                       model.switchDisplay('how');
                     },
                     child: Text(
-                      'H O W  T O  P L A Y',
+                      '遊び方',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,

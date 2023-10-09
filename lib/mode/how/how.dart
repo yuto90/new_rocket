@@ -144,7 +144,7 @@ class How extends StatelessWidget {
                       model.switchDisplay('top');
                     },
                     child: Text(
-                      'B A C K',
+                      '戻る',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,

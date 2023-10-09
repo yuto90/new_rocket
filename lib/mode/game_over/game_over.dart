@@ -38,7 +38,7 @@ class GameOver extends StatelessWidget {
                       model.resetPosition();
                     },
                     child: Text(
-                      'C O N T I N U E',
+                      '再挑戦する',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         color: Colors.white,
@@ -63,7 +63,7 @@ class GameOver extends StatelessWidget {
                       model.resetPosition();
                     },
                     child: Text(
-                      'E X I T',
+                      'トップに戻る',
                       style: TextStyle(
                           fontSize: SizeConfig.blockSizeVertical! * 1.5,
                           color: Colors.white),
