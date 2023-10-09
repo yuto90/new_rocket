@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPageModel extends ChangeNotifier {
   // todo リリースビルド時は【false】に切り替える ------------------------------------------
-  bool debugMode = false;
+  bool debugMode = true;
 
   // todo デバッグ用
   void debug() {
@@ -53,15 +53,15 @@ class MainPageModel extends ChangeNotifier {
 
   // UFOの情報
   Map ufoStatus = {
-    'ufo_1': {'x': 2.0, 'direction': '-'},
-    'ufo_075': {'x': 2.0, 'direction': '-'},
-    'ufo_05': {'x': 2.0, 'direction': '-'},
-    'ufo_025': {'x': 2.0, 'direction': '-'},
-    'ufo0': {'x': 2.0, 'direction': '-'},
-    'ufo025': {'x': 2.0, 'direction': '-'},
-    'ufo05': {'x': 2.0, 'direction': '-'},
-    'ufo075': {'x': 2.0, 'direction': '-'},
-    'ufo1': {'x': 2.0, 'direction': '-'},
+    'ufo_1': {'x': 2.0, 'direction': 'minus'},
+    'ufo_075': {'x': 2.0, 'direction': 'minus'},
+    'ufo_05': {'x': 2.0, 'direction': 'minus'},
+    'ufo_025': {'x': 2.0, 'direction': 'minus'},
+    'ufo0': {'x': 2.0, 'direction': 'minus'},
+    'ufo025': {'x': 2.0, 'direction': 'minus'},
+    'ufo05': {'x': 2.0, 'direction': 'minus'},
+    'ufo075': {'x': 2.0, 'direction': 'minus'},
+    'ufo1': {'x': 2.0, 'direction': 'minus'},
   };
 
   /// 雲オブジェクト
@@ -164,8 +164,18 @@ class MainPageModel extends ChangeNotifier {
   }
 
   /// オブジェクト位置リセット用の乱数を生成
-  double randomDouble(double coefficient) {
-    return (Random().nextDouble() + 1) * coefficient;
+  double randomDouble(double coefficient, String direction) {
+    if (direction == 'minus') {
+      return (Random().nextDouble() + 1) * coefficient;
+    } else {
+      return ((Random().nextDouble() * -1) - 1) * coefficient;
+    }
+  }
+
+  /// 障害物の進行方向を決める 'minus' or 'plus'を返す
+  String randomDirection() {
+    List<String> direction = ['minus', 'plus'];
+    return direction[Random().nextInt(direction.length)];
   }
 
   /// レベル設定
@@ -174,15 +184,15 @@ class MainPageModel extends ChangeNotifier {
     level = mappingLevel[levelIndex];
 
     // 難易度ごとに乱数の係数を調整
-    ufoStatus['ufo_1']['x'] = randomDouble(level);
-    ufoStatus['ufo_075']['x'] = randomDouble(level);
-    ufoStatus['ufo_05']['x'] = randomDouble(level);
-    ufoStatus['ufo_025']['x'] = randomDouble(level);
-    ufoStatus['ufo0']['x'] = randomDouble(level);
-    ufoStatus['ufo025']['x'] = randomDouble(level);
-    ufoStatus['ufo05']['x'] = randomDouble(level);
-    ufoStatus['ufo075']['x'] = randomDouble(level);
-    ufoStatus['ufo1']['x'] = randomDouble(level);
+    ufoStatus['ufo_1']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_075']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_05']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_025']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo0']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo025']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo05']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo075']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo1']['x'] = randomDouble(level, 'minus');
     notifyListeners();
   }
 
@@ -277,37 +287,17 @@ class MainPageModel extends ChangeNotifier {
           ground += 0.005;
         }
 
-        // UFO -----------------------------------------------
-        ufoStatus['ufo_1']['x'] -= 0.01;
-        ufoStatus['ufo_075']['x'] -= 0.01;
-        ufoStatus['ufo_05']['x'] -= 0.01;
-        ufoStatus['ufo_025']['x'] -= 0.01;
-        ufoStatus['ufo0']['x'] -= 0.01;
-        ufoStatus['ufo025']['x'] -= 0.01;
-        ufoStatus['ufo05']['x'] -= 0.01;
-        ufoStatus['ufo075']['x'] -= 0.01;
-        ufoStatus['ufo1']['x'] -= 0.01;
+        // UFOが画面外に出た時にリスポーンさせる-----------------------------------------------
+        ufoStatus.forEach((key, ufo) {
+          double change = (ufo['direction'] == 'minus') ? -0.01 : 0.01;
+          ufo['x'] += change;
 
-        // 画面外に出たら
-        if (ufoStatus['ufo_1']['x'] < -1.2) {
-          ufoStatus['ufo_1']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo_075']['x'] < -1.2) {
-          ufoStatus['ufo_075']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo_05']['x'] < -1.2) {
-          ufoStatus['ufo_05']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo_025']['x'] < -1.2) {
-          ufoStatus['ufo_025']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo0']['x'] < -1.2) {
-          ufoStatus['ufo0']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo025']['x'] < -1.2) {
-          ufoStatus['ufo025']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo05']['x'] < -1.2) {
-          ufoStatus['ufo05']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo075']['x'] < -1.2) {
-          ufoStatus['ufo075']['x'] = randomDouble(level);
-        } else if (ufoStatus['ufo1']['x'] < -1.2) {
-          ufoStatus['ufo1']['x'] = randomDouble(level);
-        }
+          if ((change < 0 && ufo['x'] < -1.2) ||
+              (change > 0 && ufo['x'] > 1.2)) {
+            ufo['direction'] = randomDirection();
+            ufo['x'] = randomDouble(level, ufo['direction']);
+          }
+        });
 
         //雲  --------------------------------------------------
         // 地球ステージの時
@@ -500,15 +490,15 @@ class MainPageModel extends ChangeNotifier {
     spaceStops = 0;
     count = 0;
 
-    ufoStatus['ufo_1']['x'] = randomDouble(level);
-    ufoStatus['ufo_075']['x'] = randomDouble(level);
-    ufoStatus['ufo_05']['x'] = randomDouble(level);
-    ufoStatus['ufo_025']['x'] = randomDouble(level);
-    ufoStatus['ufo0']['x'] = randomDouble(level);
-    ufoStatus['ufo025']['x'] = randomDouble(level);
-    ufoStatus['ufo05']['x'] = randomDouble(level);
-    ufoStatus['ufo075']['x'] = randomDouble(level);
-    ufoStatus['ufo1']['x'] = randomDouble(level);
+    ufoStatus['ufo_1']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_075']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_05']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo_025']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo0']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo025']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo05']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo075']['x'] = randomDouble(level, 'minus');
+    ufoStatus['ufo1']['x'] = randomDouble(level, 'minus');
 
     cloud = -1;
     cloud2 = -0.8;
