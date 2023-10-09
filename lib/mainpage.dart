@@ -71,39 +71,39 @@ class MainPage extends StatelessWidget {
                     : const SizedBox(),
                 // * UFO -----------------------------------------------------------
                 Align(
-                  alignment: Alignment(model.ufo_1, -1),
+                  alignment: Alignment(model.ufoStatus['ufo_1']['x'], -1),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo_075, -0.75),
+                  alignment: Alignment(model.ufoStatus['ufo_075']['x'], -0.75),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo_05, -0.5),
+                  alignment: Alignment(model.ufoStatus['ufo_05']['x'], -0.5),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo_025, -0.25),
+                  alignment: Alignment(model.ufoStatus['ufo_025']['x'], -0.25),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo0, 0),
+                  alignment: Alignment(model.ufoStatus['ufo0']['x'], 0),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo025, 0.25),
+                  alignment: Alignment(model.ufoStatus['ufo025']['x'], 0.25),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo05, 0.5),
+                  alignment: Alignment(model.ufoStatus['ufo05']['x'], 0.5),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo075, 0.75),
+                  alignment: Alignment(model.ufoStatus['ufo075']['x'], 0.75),
                   child: Ufo(),
                 ),
                 Align(
-                  alignment: Alignment(model.ufo1, 1),
+                  alignment: Alignment(model.ufoStatus['ufo1']['x'], 1),
                   child: Ufo(),
                 ),
                 // * 雲 -----------------------------------------------------------

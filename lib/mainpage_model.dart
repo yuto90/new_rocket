@@ -50,16 +50,19 @@ class MainPageModel extends ChangeNotifier {
 
   /// ゲーム開始中フラグ
   bool gameHasStarted = false;
-  // 障害物
-  double ufo_1 = 2;
-  double ufo_075 = 2;
-  double ufo_05 = 2;
-  double ufo_025 = 2;
-  double ufo0 = 2;
-  double ufo025 = 2;
-  double ufo05 = 2;
-  double ufo075 = 2;
-  double ufo1 = 2;
+
+  // UFOの情報
+  Map ufoStatus = {
+    'ufo_1': {'x': 2.0, 'direction': '-'},
+    'ufo_075': {'x': 2.0, 'direction': '-'},
+    'ufo_05': {'x': 2.0, 'direction': '-'},
+    'ufo_025': {'x': 2.0, 'direction': '-'},
+    'ufo0': {'x': 2.0, 'direction': '-'},
+    'ufo025': {'x': 2.0, 'direction': '-'},
+    'ufo05': {'x': 2.0, 'direction': '-'},
+    'ufo075': {'x': 2.0, 'direction': '-'},
+    'ufo1': {'x': 2.0, 'direction': '-'},
+  };
 
   /// 雲オブジェクト
   double cloud = -1;
@@ -171,15 +174,15 @@ class MainPageModel extends ChangeNotifier {
     level = mappingLevel[levelIndex];
 
     // 難易度ごとに乱数の係数を調整
-    ufo_1 = randomDouble(level);
-    ufo_075 = randomDouble(level);
-    ufo_05 = randomDouble(level);
-    ufo_025 = randomDouble(level);
-    ufo0 = randomDouble(level);
-    ufo025 = randomDouble(level);
-    ufo05 = randomDouble(level);
-    ufo075 = randomDouble(level);
-    ufo1 = randomDouble(level);
+    ufoStatus['ufo_1']['x'] = randomDouble(level);
+    ufoStatus['ufo_075']['x'] = randomDouble(level);
+    ufoStatus['ufo_05']['x'] = randomDouble(level);
+    ufoStatus['ufo_025']['x'] = randomDouble(level);
+    ufoStatus['ufo0']['x'] = randomDouble(level);
+    ufoStatus['ufo025']['x'] = randomDouble(level);
+    ufoStatus['ufo05']['x'] = randomDouble(level);
+    ufoStatus['ufo075']['x'] = randomDouble(level);
+    ufoStatus['ufo1']['x'] = randomDouble(level);
     notifyListeners();
   }
 
@@ -275,35 +278,35 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // UFO -----------------------------------------------
-        ufo_1 -= 0.01;
-        ufo_075 -= 0.01;
-        ufo_05 -= 0.01;
-        ufo_025 -= 0.01;
-        ufo0 -= 0.01;
-        ufo025 -= 0.01;
-        ufo05 -= 0.01;
-        ufo075 -= 0.01;
-        ufo1 -= 0.01;
+        ufoStatus['ufo_1']['x'] -= 0.01;
+        ufoStatus['ufo_075']['x'] -= 0.01;
+        ufoStatus['ufo_05']['x'] -= 0.01;
+        ufoStatus['ufo_025']['x'] -= 0.01;
+        ufoStatus['ufo0']['x'] -= 0.01;
+        ufoStatus['ufo025']['x'] -= 0.01;
+        ufoStatus['ufo05']['x'] -= 0.01;
+        ufoStatus['ufo075']['x'] -= 0.01;
+        ufoStatus['ufo1']['x'] -= 0.01;
 
         // 画面外に出たら
-        if (ufo_1 < -1.2) {
-          ufo_1 = randomDouble(level);
-        } else if (ufo_075 < -1.2) {
-          ufo_075 = randomDouble(level);
-        } else if (ufo_05 < -1.2) {
-          ufo_05 = randomDouble(level);
-        } else if (ufo_025 < -1.2) {
-          ufo_025 = randomDouble(level);
-        } else if (ufo0 < -1.2) {
-          ufo0 = randomDouble(level);
-        } else if (ufo025 < -1.2) {
-          ufo025 = randomDouble(level);
-        } else if (ufo05 < -1.2) {
-          ufo05 = randomDouble(level);
-        } else if (ufo075 < -1.2) {
-          ufo075 = randomDouble(level);
-        } else if (ufo1 < -1.2) {
-          ufo1 = randomDouble(level);
+        if (ufoStatus['ufo_1']['x'] < -1.2) {
+          ufoStatus['ufo_1']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo_075']['x'] < -1.2) {
+          ufoStatus['ufo_075']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo_05']['x'] < -1.2) {
+          ufoStatus['ufo_05']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo_025']['x'] < -1.2) {
+          ufoStatus['ufo_025']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo0']['x'] < -1.2) {
+          ufoStatus['ufo0']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo025']['x'] < -1.2) {
+          ufoStatus['ufo025']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo05']['x'] < -1.2) {
+          ufoStatus['ufo05']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo075']['x'] < -1.2) {
+          ufoStatus['ufo075']['x'] = randomDouble(level);
+        } else if (ufoStatus['ufo1']['x'] < -1.2) {
+          ufoStatus['ufo1']['x'] = randomDouble(level);
         }
 
         //雲  --------------------------------------------------
@@ -378,55 +381,62 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // ufoの当たり判定
-        if ((ufo_1 <= 0.1 && ufo_1 >= -0.1) &&
+        if ((ufoStatus['ufo_1']['x'] <= 0.1 &&
+                ufoStatus['ufo_1']['x'] >= -0.1) &&
             (rocketYaxis <= -0.9 && rocketYaxis >= -1.1)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo_075 <= 0.1 && ufo_075 >= -0.1) &&
+        if ((ufoStatus['ufo_075']['x'] <= 0.1 &&
+                ufoStatus['ufo_075']['x'] >= -0.1) &&
             (rocketYaxis <= -0.65 && rocketYaxis >= -0.85)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo_05 <= 0.1 && ufo_05 >= -0.1) &&
+        if ((ufoStatus['ufo_05']['x'] <= 0.1 &&
+                ufoStatus['ufo_05']['x'] >= -0.1) &&
             (rocketYaxis <= -0.4 && rocketYaxis >= -0.6)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo_025 <= 0.1 && ufo_025 >= -0.1) &&
+        if ((ufoStatus['ufo_025']['x'] <= 0.1 &&
+                ufoStatus['ufo_025']['x'] >= -0.1) &&
             (rocketYaxis <= -0.15 && rocketYaxis >= -0.35)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo0 <= 0.1 && ufo0 >= -0.1) &&
+        if ((ufoStatus['ufo0']['x'] <= 0.1 && ufoStatus['ufo0']['x'] >= -0.1) &&
             (rocketYaxis <= 0.1 && rocketYaxis >= -0.1)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo025 <= 0.1 && ufo025 >= -0.1) &&
+        if ((ufoStatus['ufo025']['x'] <= 0.1 &&
+                ufoStatus['ufo025']['x'] >= -0.1) &&
             (rocketYaxis <= 0.35 && rocketYaxis >= 0.15)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo05 <= 0.1 && ufo05 >= -0.1) &&
+        if ((ufoStatus['ufo05']['x'] <= 0.1 &&
+                ufoStatus['ufo05']['x'] >= -0.1) &&
             (rocketYaxis <= 0.6 && rocketYaxis >= 0.4)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo075 <= 0.1 && ufo075 >= -0.1) &&
+        if ((ufoStatus['ufo075']['x'] <= 0.1 &&
+                ufoStatus['ufo075']['x'] >= -0.1) &&
             (rocketYaxis <= 0.85 && rocketYaxis >= 0.65)) {
           timer.cancel();
           gameHasStarted = false;
           display = 'game_over';
         }
-        if ((ufo1 <= 0.1 && ufo1 >= -0.1) &&
+        if ((ufoStatus['ufo1']['x'] <= 0.1 && ufoStatus['ufo1']['x'] >= -0.1) &&
             (rocketYaxis <= 1.1 && rocketYaxis >= 0.9)) {
           timer.cancel();
           gameHasStarted = false;
@@ -490,15 +500,15 @@ class MainPageModel extends ChangeNotifier {
     spaceStops = 0;
     count = 0;
 
-    ufo_1 = randomDouble(level);
-    ufo_075 = randomDouble(level);
-    ufo_05 = randomDouble(level);
-    ufo_025 = randomDouble(level);
-    ufo0 = randomDouble(level);
-    ufo025 = randomDouble(level);
-    ufo05 = randomDouble(level);
-    ufo075 = randomDouble(level);
-    ufo1 = randomDouble(level);
+    ufoStatus['ufo_1']['x'] = randomDouble(level);
+    ufoStatus['ufo_075']['x'] = randomDouble(level);
+    ufoStatus['ufo_05']['x'] = randomDouble(level);
+    ufoStatus['ufo_025']['x'] = randomDouble(level);
+    ufoStatus['ufo0']['x'] = randomDouble(level);
+    ufoStatus['ufo025']['x'] = randomDouble(level);
+    ufoStatus['ufo05']['x'] = randomDouble(level);
+    ufoStatus['ufo075']['x'] = randomDouble(level);
+    ufoStatus['ufo1']['x'] = randomDouble(level);
 
     cloud = -1;
     cloud2 = -0.8;
