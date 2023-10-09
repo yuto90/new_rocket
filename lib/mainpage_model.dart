@@ -81,7 +81,7 @@ class MainPageModel extends ChangeNotifier {
     'ufo025': {
       'x': 2.0,
       'direction': 'minus',
-      'outZone': {'start': 0.35, 'end': -.15}
+      'outZone': {'start': 0.35, 'end': 0.15}
     },
     'ufo05': {
       'x': 2.0,
