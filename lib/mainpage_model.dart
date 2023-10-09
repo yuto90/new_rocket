@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPageModel extends ChangeNotifier {
   // todo リリースビルド時は【false】に切り替える ------------------------------------------
-  bool debugMode = true;
+  bool debugMode = false;
 
   // todo デバッグ用
   void debug() {
@@ -53,15 +53,51 @@ class MainPageModel extends ChangeNotifier {
 
   // UFOの情報
   Map ufoStatus = {
-    'ufo_1': {'x': 2.0, 'direction': 'minus'},
-    'ufo_075': {'x': 2.0, 'direction': 'minus'},
-    'ufo_05': {'x': 2.0, 'direction': 'minus'},
-    'ufo_025': {'x': 2.0, 'direction': 'minus'},
-    'ufo0': {'x': 2.0, 'direction': 'minus'},
-    'ufo025': {'x': 2.0, 'direction': 'minus'},
-    'ufo05': {'x': 2.0, 'direction': 'minus'},
-    'ufo075': {'x': 2.0, 'direction': 'minus'},
-    'ufo1': {'x': 2.0, 'direction': 'minus'},
+    'ufo_1': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': -0.9, 'end': -1.1}
+    },
+    'ufo_075': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': -0.65, 'end': -0.85}
+    },
+    'ufo_05': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': -0.4, 'end': -0.6}
+    },
+    'ufo_025': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': -0.15, 'end': -0.35}
+    },
+    'ufo0': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': 0.1, 'end': -0.1}
+    },
+    'ufo025': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': 0.35, 'end': -.15}
+    },
+    'ufo05': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': 0.6, 'end': 0.4}
+    },
+    'ufo075': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': 0.65, 'end': 0.85}
+    },
+    'ufo1': {
+      'x': 2.0,
+      'direction': 'minus',
+      'outZone': {'start': 0.9, 'end': 1.1}
+    },
   };
 
   /// 雲オブジェクト
@@ -184,15 +220,11 @@ class MainPageModel extends ChangeNotifier {
     level = mappingLevel[levelIndex];
 
     // 難易度ごとに乱数の係数を調整
-    ufoStatus['ufo_1']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_075']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_05']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_025']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo0']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo025']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo05']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo075']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo1']['x'] = randomDouble(level, 'minus');
+    ufoStatus.forEach((key, ufo) {
+      ufo['direction'] = randomDirection();
+      ufo['x'] = randomDouble(level, ufo['direction']);
+    });
+
     notifyListeners();
   }
 
@@ -371,67 +403,15 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // ufoの当たり判定
-        if ((ufoStatus['ufo_1']['x'] <= 0.1 &&
-                ufoStatus['ufo_1']['x'] >= -0.1) &&
-            (rocketYaxis <= -0.9 && rocketYaxis >= -1.1)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo_075']['x'] <= 0.1 &&
-                ufoStatus['ufo_075']['x'] >= -0.1) &&
-            (rocketYaxis <= -0.65 && rocketYaxis >= -0.85)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo_05']['x'] <= 0.1 &&
-                ufoStatus['ufo_05']['x'] >= -0.1) &&
-            (rocketYaxis <= -0.4 && rocketYaxis >= -0.6)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo_025']['x'] <= 0.1 &&
-                ufoStatus['ufo_025']['x'] >= -0.1) &&
-            (rocketYaxis <= -0.15 && rocketYaxis >= -0.35)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo0']['x'] <= 0.1 && ufoStatus['ufo0']['x'] >= -0.1) &&
-            (rocketYaxis <= 0.1 && rocketYaxis >= -0.1)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo025']['x'] <= 0.1 &&
-                ufoStatus['ufo025']['x'] >= -0.1) &&
-            (rocketYaxis <= 0.35 && rocketYaxis >= 0.15)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo05']['x'] <= 0.1 &&
-                ufoStatus['ufo05']['x'] >= -0.1) &&
-            (rocketYaxis <= 0.6 && rocketYaxis >= 0.4)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo075']['x'] <= 0.1 &&
-                ufoStatus['ufo075']['x'] >= -0.1) &&
-            (rocketYaxis <= 0.85 && rocketYaxis >= 0.65)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
-        if ((ufoStatus['ufo1']['x'] <= 0.1 && ufoStatus['ufo1']['x'] >= -0.1) &&
-            (rocketYaxis <= 1.1 && rocketYaxis >= 0.9)) {
-          timer.cancel();
-          gameHasStarted = false;
-          display = 'game_over';
-        }
+        ufoStatus.forEach((key, ufo) {
+          if ((ufo['x'] <= 0.1 && ufo['x'] >= -0.1) &&
+              (rocketYaxis <= ufo['outZone']['start'] &&
+                  rocketYaxis >= ufo['outZone']['end'])) {
+            timer.cancel();
+            gameHasStarted = false;
+            display = 'game_over';
+          }
+        });
 
         // 星の当たり判定
         if (((star - rocketYaxis) >= -0.1 && (star - rocketYaxis) <= 0.1) &&
