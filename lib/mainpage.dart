@@ -32,9 +32,7 @@ class MainPage extends StatelessWidget {
             child: Stack(
               children: [
                 // * 空背景 ----------------------------------------------------------
-                Container(
-                  color: Colors.blue,
-                ),
+                Container(color: model.backgroundColor()),
                 //宇宙ステージ
                 Container(
                   height: model.space,

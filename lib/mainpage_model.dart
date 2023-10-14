@@ -24,7 +24,7 @@ class MainPageModel extends ChangeNotifier {
   double level = 1;
   // todo レベル設定
   /// レベルとUFOの出現頻度のマッピング
-  Map mappingLevel = {
+  final Map mappingLevel = {
     1: 8.0,
     2: 7.0,
     3: 6.0,
@@ -496,5 +496,21 @@ class MainPageModel extends ChangeNotifier {
     star3 = -2.6;
 
     notifyListeners();
+  }
+
+  Color? backgroundColor() {
+    final hour = DateTime.now().hour;
+
+    if (hour >= 4 && hour < 7) {
+      return Colors.indigo[400];
+    } else if (hour >= 7 && hour < 12) {
+      return Colors.blue[200];
+    } else if (hour >= 12 && hour < 16) {
+      return Colors.blue[400];
+    } else if (hour >= 16 && hour < 18) {
+      return Colors.orange[300];
+    } else {
+      return Colors.indigo[900];
+    }
   }
 }
