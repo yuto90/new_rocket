@@ -100,10 +100,17 @@ class MainPageModel extends ChangeNotifier {
     },
   };
 
-  /// 雲オブジェクト
-  double cloud = -1;
-  double cloud2 = -0.8;
-  double cloud3 = -0.6;
+  Map cloudStatus = {
+    'cloud1': {
+      'y': -1.0,
+    },
+    'cloud2': {
+      'y': -0.8,
+    },
+    'cloud3': {
+      'y': -0.6,
+    },
+  };
 
   /// 隕石オブジェクト
   double meteorite = -3;
@@ -320,7 +327,7 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // UFOが画面外に出た時にリスポーンさせる-----------------------------------------------
-        ufoStatus.forEach((key, ufo) {
+        ufoStatus.forEach((_, ufo) {
           double change = (ufo['direction'] == 'minus') ? -0.01 : 0.01;
           ufo['x'] += change;
 
@@ -333,18 +340,18 @@ class MainPageModel extends ChangeNotifier {
 
         //雲  --------------------------------------------------
         // 地球ステージの時
-        cloud += 0.005;
-        cloud2 += 0.0047; // todo なぜか落下スピードが早いので調整
-        cloud3 += 0.005;
+        cloudStatus['cloud1']['y'] += 0.005;
+        cloudStatus['cloud2']['y'] += 0.005; // todo なぜか落下スピードが早いので調整
+        cloudStatus['cloud3']['y'] += 0.005;
         if (count <= 30000) {
-          if (cloud > 1.5) {
-            cloud = -1.5;
+          if (cloudStatus['cloud1']['y'] > 1.5) {
+            cloudStatus['cloud1']['y'] = -1.5;
           }
-          if (cloud2 > 1.5) {
-            cloud2 = -1.7;
+          if (cloudStatus['cloud2']['y'] > 1.5) {
+            cloudStatus['cloud2']['y'] = -1.7;
           }
-          if (cloud3 > 1.5) {
-            cloud3 = -1.8;
+          if (cloudStatus['cloud3']['y'] > 1.5) {
+            cloudStatus['cloud3']['y'] = -1.8;
           }
         }
 
@@ -469,20 +476,14 @@ class MainPageModel extends ChangeNotifier {
     space = 0;
     spaceStops = 0;
     count = 0;
+    goal = -3;
+    ground = 1.1;
 
-    ufoStatus['ufo_1']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_075']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_05']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo_025']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo0']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo025']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo05']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo075']['x'] = randomDouble(level, 'minus');
-    ufoStatus['ufo1']['x'] = randomDouble(level, 'minus');
+    ufoStatus.forEach((_, ufo) => ufo['x'] = randomDouble(level, 'minus'));
 
-    cloud = -1;
-    cloud2 = -0.8;
-    cloud3 = -0.6;
+    cloudStatus['cloud1']['y'] = -1.0;
+    cloudStatus['cloud2']['y'] = -0.8;
+    cloudStatus['cloud3']['y'] = -0.6;
 
     meteorite = -3;
     meteorite2 = -2.8;
@@ -493,9 +494,6 @@ class MainPageModel extends ChangeNotifier {
     star = -2;
     star2 = -2.8;
     star3 = -2.6;
-
-    goal = -3;
-    ground = 1.1;
 
     notifyListeners();
   }

@@ -108,21 +108,21 @@ class MainPage extends StatelessWidget {
                 ),
                 // * 雲 -----------------------------------------------------------
                 Align(
-                  alignment: Alignment(0.9, model.cloud),
+                  alignment: Alignment(0.9, model.cloudStatus['cloud1']['y']),
                   child: Cloud(
                     vertical: SizeConfig.blockSizeVertical! * 20,
                     horizontal: SizeConfig.blockSizeHorizontal! * 60,
                   ),
                 ),
                 Align(
-                  alignment: Alignment(-1, model.cloud2),
+                  alignment: Alignment(-1, model.cloudStatus['cloud2']['y']),
                   child: Cloud(
                     vertical: SizeConfig.blockSizeVertical! * 15,
                     horizontal: SizeConfig.blockSizeHorizontal! * 45,
                   ),
                 ),
                 Align(
-                  alignment: Alignment(1, model.cloud3),
+                  alignment: Alignment(1, model.cloudStatus['cloud3']['y']),
                   child: Cloud(
                     vertical: SizeConfig.blockSizeVertical! * 20,
                     horizontal: SizeConfig.blockSizeHorizontal! * 50,
