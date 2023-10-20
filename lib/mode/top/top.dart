@@ -24,6 +24,17 @@ class Top extends StatelessWidget {
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment(0, 0.15),
+                child: Text(
+                  'version 1.2',
+                  style: TextStyle(
+                    fontSize: SizeConfig.blockSizeVertical! * 1.5,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
               // todo デバッグボタン ----------------------------------------------
               model.debugMode
                   ? Align(
