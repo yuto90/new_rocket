@@ -189,7 +189,7 @@ class MainPage extends StatelessWidget {
                     ? Align(
                         // ロケットの初期位置
                         alignment: Alignment(0, model.rocketYaxis),
-                        child: model.display == 'game_over'
+                        child: model.display == 'game_over' || model.explosion
                             ? Explosion()
                             : MyRocket(boostFlg: model.boost),
                       )

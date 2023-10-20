@@ -140,6 +140,9 @@ class MainPageModel extends ChangeNotifier {
   /// ブーストフラグ
   bool boost = false;
 
+  /// ロケット爆発フラグ
+  bool explosion = false;
+
   /// 広告バナー
   late BannerAd myBanner;
 
@@ -209,9 +212,9 @@ class MainPageModel extends ChangeNotifier {
   /// オブジェクト位置リセット用の乱数を生成
   double randomDouble(double coefficient, String direction) {
     if (direction == 'minus') {
-      return (Random().nextDouble() + 1) * coefficient;
+      return (Random().nextDouble() + 1.5) * coefficient;
     } else {
-      return ((Random().nextDouble() * -1) - 1) * coefficient;
+      return (-(Random().nextDouble()) - 1.5) * coefficient;
     }
   }
 
@@ -241,41 +244,76 @@ class MainPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ゲーム進行時に画面タップした時
-  void move() {
-    // how画面から飛んでる状態でtop画面、ready画面に繊維時はmoveさせない
-    if (display != 'top' && display != 'ready') {
-      time = 0;
-      initialHeight = rocketYaxis;
-
-      // 1秒だけターボエフェクトを表示
+  // ブーストエフェクトを表示
+  void boostEffect() {
+    if (!boost) {
       boost = true;
       Future.delayed(Duration(seconds: 1), () {
         boost = false;
-        notifyListeners();
       });
-
-      notifyListeners();
     }
+  }
+
+  // ゲーム進行時に画面タップした時ジャンプさせる
+  void move() {
+    time = 0;
+    initialHeight = rocketYaxis;
+    boostEffect();
+    notifyListeners();
+  }
+
+  /// 重力計算の数式
+  void gravity() {
+    height = -4.5 * time * time + 0.2 + time;
+    rocketYaxis = initialHeight - height;
   }
 
   // how画面にデモ動作を実行させる
   void howDemoMove() {
     gameHasStarted = true;
-    move();
-
     Timer.periodic(Duration(milliseconds: 10), (timer) {
       time += 0.005;
-      height = -4.5 * time * time + 0.2 + time;
-      rocketYaxis = initialHeight - height;
+      gravity();
+      boostEffect();
+      // UFOが画面外に出た時にリスポーンさせる-----------------------------------------------
+      double change =
+          (ufoStatus['ufo_025']['direction'] == 'minus') ? -0.01 : 0.01;
+      ufoStatus['ufo_025']['x'] += change;
+
+      if ((change < 0 && ufoStatus['ufo_025']['x'] < -1.2) ||
+          (change > 0 && ufoStatus['ufo_025']['x'] > 1.2)) {
+        ufoStatus['ufo_025']['direction'] = randomDirection();
+        ufoStatus['ufo_025']['x'] =
+            randomDouble(level, ufoStatus['ufo_025']['direction']);
+      }
+
+      if ((ufoStatus['ufo_025']['x'] <= 0.1 &&
+              ufoStatus['ufo_025']['x'] >= -0.1) &&
+          (rocketYaxis <= ufoStatus['ufo_025']['outZone']['start'] &&
+              rocketYaxis >= ufoStatus['ufo_025']['outZone']['end'])) {
+        //
+        timer.cancel();
+        explosion = true;
+        // 1秒だけ爆発エフェクトを表示してその後に再帰処理で再開
+        Future.delayed(Duration(seconds: 1), () {
+          explosion = false;
+          resetPosition();
+          gameHasStarted = false;
+          howDemoMove();
+        });
+      }
 
       if (rocketYaxis > 0) {
-        timer.cancel();
-        gameHasStarted = false;
         rocketYaxis = 0;
         time = 0;
         height = 0;
         initialHeight = 0;
+      }
+      // 戻るボタンを押された時
+      if (!gameHasStarted) {
+        timer.cancel();
+        boost = false;
+        resetPosition();
       }
       notifyListeners();
     });
@@ -286,8 +324,6 @@ class MainPageModel extends ChangeNotifier {
       move();
     } else if (display == 'ready') {
       startGame();
-    } else if (display == 'how') {
-      howDemoMove();
     }
   }
 
@@ -299,8 +335,7 @@ class MainPageModel extends ChangeNotifier {
       Duration(milliseconds: 10),
       (timer) {
         time += 0.005;
-        height = -4.5 * time * time + 0.2 + time;
-        rocketYaxis = initialHeight - height;
+        gravity();
 
         // 経過時間をカウントする用
         count += 10;
@@ -498,6 +533,7 @@ class MainPageModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// プレイ中時間に応じて背景の色を変えるロジック
   Color? backgroundColor() {
     final hour = DateTime.now().hour;
 

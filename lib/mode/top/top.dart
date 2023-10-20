@@ -153,6 +153,7 @@ class Top extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () {
                       model.switchDisplay('how');
+                      model.howDemoMove();
                     },
                     child: Text(
                       '遊び方',

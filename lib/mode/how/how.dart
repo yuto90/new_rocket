@@ -115,10 +115,13 @@ class How extends StatelessWidget {
                     color: Colors.black,
                   ),
                   height: SizeConfig.blockSizeVertical! * 5,
-                  width: SizeConfig.blockSizeHorizontal! * 75,
+                  width: SizeConfig.blockSizeHorizontal! * 90,
                   child: Center(
                     child: Text(
-                      '画面をタップするとロケットが上にブースト',
+                      '''
+画面をタップするとロケットが上にブースト!
+障害物に当たるとゲームオーバー!
+                      ''',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
                         fontWeight: FontWeight.bold,
@@ -142,6 +145,7 @@ class How extends StatelessWidget {
                   child: OutlinedButton(
                     onPressed: () {
                       model.switchDisplay('top');
+                      model.gameHasStarted = false;
                     },
                     child: Text(
                       '戻る',
