@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'const/mainpage_const.dart';
 
 class MainPageModel extends ChangeNotifier {
   // todo リリースビルド時は【false】に切り替える ------------------------------------------
@@ -22,20 +23,6 @@ class MainPageModel extends ChangeNotifier {
 
   /// 難易度
   double level = 1;
-  // todo レベル設定
-  /// レベルとUFOの出現頻度のマッピング
-  final Map mappingLevel = {
-    1: 8.0,
-    2: 7.0,
-    3: 6.0,
-    4: 5.0,
-    5: 4.0,
-    6: 2.5,
-    7: 2.0,
-    8: 1.8,
-    9: 1.5,
-    10: 1.2,
-  };
 
   /// 選択したレベル
   int selectedLevel = 1;
