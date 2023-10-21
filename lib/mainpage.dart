@@ -15,7 +15,7 @@ import 'objects/meteorite.dart';
 import 'objects/rocket.dart';
 import 'objects/star.dart';
 import 'objects/ufo.dart';
-import 'package:new_rocket/ground.dart';
+import 'package:new_rocket/city.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -53,7 +53,10 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 // * 地面 ----------------------------------------------------------
-                ...Ground().tokyo(model),
+                Align(
+                  alignment: Alignment(0, model.city),
+                  child: City(),
+                ),
                 // * ゴール -----------------------------------------------------------
                 Align(
                   alignment: Alignment(0, model.goal),

@@ -112,7 +112,7 @@ class MainPageModel extends ChangeNotifier {
   double star3 = -3;
 
   /// 地面
-  double ground = 1.1;
+  double city = 1.1;
 
   /// 宇宙ステージの背景座標用
   double space = 0;
@@ -345,8 +345,8 @@ class MainPageModel extends ChangeNotifier {
         }
 
         // ! 地面 --------------------------------------------------
-        if (ground <= 2) {
-          ground += 0.005;
+        if (city <= 2) {
+          city += 0.005;
         }
 
         // UFOが画面外に出た時にリスポーンさせる-----------------------------------------------
@@ -500,7 +500,7 @@ class MainPageModel extends ChangeNotifier {
     spaceStops = 0;
     count = 0;
     goal = -3;
-    ground = 1.1;
+    city = 1.1;
 
     ufoStatus.forEach((_, ufo) => ufo['x'] = randomDouble(level, 'minus'));
 
