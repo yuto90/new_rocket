@@ -284,7 +284,7 @@ class MainPageModel extends ChangeNotifier {
           (change > 0 && ufoStatus['ufo_025']['x'] > 1.2)) {
         ufoStatus['ufo_025']['direction'] = randomDirection();
         ufoStatus['ufo_025']['x'] =
-            randomDouble(level, ufoStatus['ufo_025']['direction']);
+            randomDouble(10, ufoStatus['ufo_025']['direction']);
       }
 
       if ((ufoStatus['ufo_025']['x'] <= 0.1 &&

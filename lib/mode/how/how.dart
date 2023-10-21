@@ -114,13 +114,14 @@ class How extends StatelessWidget {
                     border: Border.all(color: Colors.white),
                     color: Colors.black,
                   ),
-                  height: SizeConfig.blockSizeVertical! * 5,
+                  height: SizeConfig.blockSizeVertical! * 7,
                   width: SizeConfig.blockSizeHorizontal! * 90,
                   child: Center(
                     child: Text(
                       '''
 画面をタップするとロケットが上にブースト!
 横から向かってくるUFOや星に当たるとゲームオーバー!
+試しに画面をタップしてみてね
                       ''',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
