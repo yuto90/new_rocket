@@ -291,15 +291,16 @@ class MainPageModel extends ChangeNotifier {
               ufoStatus['ufo_025']['x'] >= -0.1) &&
           (rocketYaxis <= ufoStatus['ufo_025']['outZone']['start'] &&
               rocketYaxis >= ufoStatus['ufo_025']['outZone']['end'])) {
-        //
         timer.cancel();
         explosion = true;
         // 1秒だけ爆発エフェクトを表示してその後に再帰処理で再開
         Future.delayed(Duration(seconds: 1), () {
-          explosion = false;
-          resetPosition();
-          gameHasStarted = false;
-          howDemoMove();
+          // 非同期処理中に戻るボタンを押されていたら処理は行わない
+          if (display == 'how') {
+            explosion = false;
+            resetPosition();
+            howDemoMove();
+          }
         });
       }
 
@@ -530,6 +531,15 @@ class MainPageModel extends ChangeNotifier {
     star2 = -2.8;
     star3 = -2.6;
 
+    notifyListeners();
+  }
+
+  void returnHowToTop() {
+    switchDisplay('top');
+    gameHasStarted = false;
+    explosion = false;
+    boost = false;
+    resetPosition();
     notifyListeners();
   }
 

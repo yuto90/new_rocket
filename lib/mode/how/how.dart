@@ -36,7 +36,7 @@ class How extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'ロケットに迫る障害物を避けて宇宙の惑星を目指そう！',
+                        'ロケットに迫るUFOと星を避けて宇宙の惑星を目指そう!',
                         style: TextStyle(
                           fontSize: SizeConfig.blockSizeVertical! * 1.5,
                           fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class How extends StatelessWidget {
                           Spacer(),
                           Spacer(flex: 8),
                           Text(
-                            '障害物',
+                            'UFO, 星',
                             style: TextStyle(
                               fontSize: SizeConfig.blockSizeVertical! * 1.5,
                               fontWeight: FontWeight.bold,
@@ -120,7 +120,7 @@ class How extends StatelessWidget {
                     child: Text(
                       '''
 画面をタップするとロケットが上にブースト!
-障害物に当たるとゲームオーバー!
+横から向かってくるUFOや星に当たるとゲームオーバー!
                       ''',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
@@ -143,10 +143,7 @@ class How extends StatelessWidget {
                     color: Colors.black,
                   ),
                   child: OutlinedButton(
-                    onPressed: () {
-                      model.switchDisplay('top');
-                      model.gameHasStarted = false;
-                    },
+                    onPressed: () => model.returnHowToTop(),
                     child: Text(
                       '戻る',
                       style: TextStyle(
