@@ -120,8 +120,8 @@ class How extends StatelessWidget {
                     child: Text(
                       '''
 画面をタップするとロケットが上にブースト!
-横から向かってくるUFOや星に当たるとゲームオーバー!
-試しに画面をタップしてみてね
+横から向かってくるUFOや星に当たったり、
+画面外に出てしまうとゲームオーバー!
                       ''',
                       style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical! * 1.5,
