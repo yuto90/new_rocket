@@ -1,0 +1,23 @@
+version = 1
+name = "New Rocket"
+
+[setup]
+script = "bash .agent-shared/scripts/codex-worktree-setup.sh"
+
+[cleanup]
+script = "bash .agent-shared/scripts/codex-worktree-cleanup.sh"
+
+[[actions]]
+name = "run"
+icon = "tool"
+command = "fvm flutter run"
+
+[[actions]]
+name = "test"
+icon = "tool"
+command = "fvm flutter test"
+
+[[actions]]
+name = "analyze"
+icon = "tool"
+command = "fvm flutter analyze"
