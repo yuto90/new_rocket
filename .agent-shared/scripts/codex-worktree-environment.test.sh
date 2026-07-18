@@ -40,20 +40,18 @@ assert_file_exists() {
 
 create_fixture_repo() {
   local fixture_name="$1"
-  local primary_repo="$test_tmp_root/$fixture_name-primary"
-  local worktree_repo="$test_tmp_root/$fixture_name-worktree"
+  fixture_primary_repo="$test_tmp_root/$fixture_name-primary"
+  fixture_worktree_repo="$test_tmp_root/$fixture_name-worktree"
 
-  mkdir -p "$primary_repo/.fvm"
-  git -C "$primary_repo" init -q
-  git -C "$primary_repo" config user.email codex-test@example.com
-  git -C "$primary_repo" config user.name codex-test
-  printf '{"flutterSdkVersion":"2.8.1","flavors":{}}\n' > "$primary_repo/.fvm/fvm_config.json"
-  printf 'name: fixture\n' > "$primary_repo/pubspec.yaml"
-  git -C "$primary_repo" add .fvm/fvm_config.json pubspec.yaml
-  git -C "$primary_repo" commit -qm 'test fixture'
-  git -C "$primary_repo" worktree add -q -b "$fixture_name-branch" "$worktree_repo"
-
-  printf '%s\n%s\n' "$primary_repo" "$worktree_repo"
+  mkdir -p "$fixture_primary_repo/.fvm"
+  git -C "$fixture_primary_repo" init -q
+  git -C "$fixture_primary_repo" config user.email codex-test@example.com
+  git -C "$fixture_primary_repo" config user.name codex-test
+  printf '{"flutterSdkVersion":"2.8.1","flavors":{}}\n' > "$fixture_primary_repo/.fvm/fvm_config.json"
+  printf 'name: fixture\n' > "$fixture_primary_repo/pubspec.yaml"
+  git -C "$fixture_primary_repo" add .fvm/fvm_config.json pubspec.yaml
+  git -C "$fixture_primary_repo" commit -qm 'test fixture'
+  git -C "$fixture_primary_repo" worktree add -q -b "$fixture_name-branch" "$fixture_worktree_repo"
 }
 
 write_fake_fvm() {
@@ -91,10 +89,10 @@ PY
 }
 
 test_setup_copies_env_and_runs_fvm_in_order() {
-  local repos primary_repo worktree_repo fake_bin call_log
-  mapfile -t repos < <(create_fixture_repo "copy-env")
-  primary_repo="${repos[0]}"
-  worktree_repo="${repos[1]}"
+  local primary_repo worktree_repo fake_bin call_log
+  create_fixture_repo "copy-env"
+  primary_repo="$fixture_primary_repo"
+  worktree_repo="$fixture_worktree_repo"
   fake_bin="$test_tmp_root/copy-env-bin"
   call_log="$test_tmp_root/copy-env-fvm.log"
 
@@ -112,10 +110,10 @@ test_setup_copies_env_and_runs_fvm_in_order() {
 }
 
 test_setup_preserves_existing_worktree_env() {
-  local repos primary_repo worktree_repo fake_bin call_log
-  mapfile -t repos < <(create_fixture_repo "preserve-env")
-  primary_repo="${repos[0]}"
-  worktree_repo="${repos[1]}"
+  local primary_repo worktree_repo fake_bin call_log
+  create_fixture_repo "preserve-env"
+  primary_repo="$fixture_primary_repo"
+  worktree_repo="$fixture_worktree_repo"
   fake_bin="$test_tmp_root/preserve-env-bin"
   call_log="$test_tmp_root/preserve-env-fvm.log"
 
@@ -133,9 +131,9 @@ test_setup_preserves_existing_worktree_env() {
 }
 
 test_setup_fails_when_primary_env_is_missing() {
-  local repos worktree_repo fake_bin call_log output_log
-  mapfile -t repos < <(create_fixture_repo "missing-env")
-  worktree_repo="${repos[1]}"
+  local worktree_repo fake_bin call_log output_log
+  create_fixture_repo "missing-env"
+  worktree_repo="$fixture_worktree_repo"
   fake_bin="$test_tmp_root/missing-env-bin"
   call_log="$test_tmp_root/missing-env-fvm.log"
   output_log="$test_tmp_root/missing-env-output.log"
@@ -155,10 +153,10 @@ test_setup_fails_when_primary_env_is_missing() {
 }
 
 test_setup_fails_when_fvm_is_missing() {
-  local repos primary_repo worktree_repo output_log
-  mapfile -t repos < <(create_fixture_repo "missing-fvm")
-  primary_repo="${repos[0]}"
-  worktree_repo="${repos[1]}"
+  local primary_repo worktree_repo output_log
+  create_fixture_repo "missing-fvm"
+  primary_repo="$fixture_primary_repo"
+  worktree_repo="$fixture_worktree_repo"
   output_log="$test_tmp_root/missing-fvm-output.log"
 
   printf 'TEST_AD_ID=from-primary\n' > "$primary_repo/.env"
@@ -175,9 +173,9 @@ test_setup_fails_when_fvm_is_missing() {
 }
 
 test_cleanup_preserves_worktree_files() {
-  local repos worktree_repo output_log
-  mapfile -t repos < <(create_fixture_repo "cleanup")
-  worktree_repo="${repos[1]}"
+  local worktree_repo output_log
+  create_fixture_repo "cleanup"
+  worktree_repo="$fixture_worktree_repo"
   output_log="$test_tmp_root/cleanup-output.log"
 
   mkdir -p "$worktree_repo/.dart_tool" "$worktree_repo/build"
