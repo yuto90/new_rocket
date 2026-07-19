@@ -42,21 +42,15 @@ class MainPage extends StatelessWidget {
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter,
                       colors: [
-                        Colors.black.withOpacity(0.8),
-                        Colors.blue.withOpacity(0.0),
+                        Colors.black.withValues(alpha: 0.8),
+                        Colors.blue.withValues(alpha: 0),
                       ],
-                      stops: [
-                        model.spaceStops,
-                        1.0,
-                      ],
+                      stops: [model.spaceStops, 1.0],
                     ),
                   ),
                 ),
                 // * 地面 ----------------------------------------------------------
-                Align(
-                  alignment: Alignment(0, model.city),
-                  child: City(),
-                ),
+                Align(alignment: Alignment(0, model.city), child: City()),
                 // * ゴール -----------------------------------------------------------
                 Align(
                   alignment: Alignment(0, model.goal),
@@ -208,17 +202,19 @@ class MainPage extends StatelessWidget {
 
                 model.display == 'clear' ||
                         model.display == 'ready' ||
-                        model.display == 'play_game'
+                        model.display == 'play_game' ||
+                        !model.isBannerLoaded ||
+                        model.myBanner == null
                     ? const SizedBox()
                     : Align(
                         alignment: Alignment(0, 1),
                         child: Container(
-                          color: Colors.white.withOpacity(0),
+                          color: Colors.white.withValues(alpha: 0),
                           height: SizeConfig.blockSizeVertical! * 8,
                           width: double.infinity,
-                          child: AdWidget(ad: model.myBanner),
+                          child: AdWidget(ad: model.myBanner!),
                         ),
-                      )
+                      ),
               ],
             ),
           );

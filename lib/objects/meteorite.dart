@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Meteorite extends StatelessWidget {
-  double vertical;
-  double horizontal;
+  final double vertical;
+  final double horizontal;
   Meteorite({required this.vertical, required this.horizontal});
 
   @override
