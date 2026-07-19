@@ -9,12 +9,15 @@ import 'mainpage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   await dotenv.load(fileName: ".env");
+  try {
+    await MobileAds.instance.initialize();
+  } catch (error) {
+    debugPrint('Mobile Ads initialization failed: $error');
+  }
   // 画面を縦に固定
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]).then((_) => runApp(MyApp()));
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: false,
         // アプリ全体にフォントを適用
         textTheme: GoogleFonts.dotGothic16TextTheme(),
       ),

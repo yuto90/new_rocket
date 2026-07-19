@@ -4,7 +4,7 @@ import 'package:new_rocket/objects/lock.dart';
 import '../../size_config.dart';
 
 class Top extends StatelessWidget {
-  MainPageModel model;
+  final MainPageModel model;
   Top({required this.model});
 
   @override
