@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:new_rocket/game/game_controller.dart';
 import 'package:new_rocket/game/game_loop.dart';
+import 'package:new_rocket/game/game_state.dart';
 
 abstract interface class RandomSource {
   double nextDouble();
@@ -30,3 +32,7 @@ final randomSourceProvider = Provider<RandomSource>(
 );
 
 final nowProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+
+final gameControllerProvider = NotifierProvider<GameController, GameState>(
+  GameController.new,
+);
