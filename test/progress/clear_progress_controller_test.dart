@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:new_rocket/progress/clear_progress_controller.dart';
 import 'package:new_rocket/progress/clear_progress_repository.dart';
 import 'package:new_rocket/progress/progress_providers.dart';
 

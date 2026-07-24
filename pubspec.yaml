@@ -25,7 +25,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^3.3.2
-  provider: ^6.1.5+1
   google_mobile_ads: ^9.0.0
   flutter_dotenv: ^6.0.1
 
