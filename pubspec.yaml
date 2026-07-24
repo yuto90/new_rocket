@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^6.1.5+1
+  flutter_riverpod: ^3.3.2
   google_mobile_ads: ^9.0.0
   flutter_dotenv: ^6.0.1
 
@@ -36,6 +36,8 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
+    sdk: flutter
+  integration_test:
     sdk: flutter
   flutter_launcher_icons: ^0.14.4
 
