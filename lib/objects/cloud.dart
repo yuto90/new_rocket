@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../size_config.dart';
 
 class Cloud extends StatelessWidget {
-  double vertical;
-  double horizontal;
+  final double vertical;
+  final double horizontal;
   Cloud({required this.vertical, required this.horizontal});
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../size_config.dart';
 
 class MyRocket extends StatelessWidget {
-  bool boostFlg;
+  final bool boostFlg;
   MyRocket({required this.boostFlg});
 
   @override
